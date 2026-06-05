@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#0f0f1a" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <title>idol — 偶像生活模拟器</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ====== 偶像设定页面 ====== -->
+  <div class="setup-screen" id="setupScreen">
+    <div class="setup-card">
+      <!-- App 图标 -->
+      <div class="app-logo-wrap">
+        <svg class="app-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="logoBg" cx="40%" cy="30%">
+              <stop offset="0%" stop-color="#2d2658"/>
+              <stop offset="100%" stop-color="#0f0f1a"/>
+            </radialGradient>
+            <linearGradient id="logoText" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="45%" stop-color="#d4d4d4"/>
+              <stop offset="100%" stop-color="#999999"/>
+            </linearGradient>
+            <filter id="logoGlow">
+              <feGaussianBlur stdDeviation="1.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- 圆角方形底 -->
+          <rect x="0" y="0" width="120" height="120" rx="28" fill="url(#logoBg)" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
+          <!-- 内光晕 -->
+          <rect x="6" y="6" width="108" height="108" rx="23" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+          <!-- idol 字样 -->
+          <text x="60" y="73" text-anchor="middle" font-size="36" font-weight="700" font-family="'Segoe UI', -apple-system, sans-serif" fill="url(#logoText)" filter="url(#logoGlow)" letter-spacing="3">idol</text>
+          <!-- 星光粒子 -->
+          <circle cx="22" cy="22" r="2" fill="#fff" opacity="0.8"><animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="96" cy="18" r="1.5" fill="#fff" opacity="0.6"><animate attributeName="opacity" values="0.6;0.1;0.6" dur="2.5s" repeatCount="indefinite"/></circle>
+          <circle cx="18" cy="98" r="1.8" fill="#fff" opacity="0.5"><animate attributeName="opacity" values="0.5;0.15;0.5" dur="3.2s" repeatCount="indefinite"/></circle>
+          <circle cx="100" cy="95" r="1.2" fill="#fff" opacity="0.7"><animate attributeName="opacity" values="0.7;0.2;0.7" dur="1.8s" repeatCount="indefinite"/></circle>
+          <circle cx="40" cy="12" r="1" fill="#fff" opacity="0.4"><animate attributeName="opacity" values="0.4;0.1;0.4" dur="2.8s" repeatCount="indefinite"/></circle>
+          <circle cx="78" cy="102" r="1.4" fill="#fff" opacity="0.55"><animate attributeName="opacity" values="0.55;0.1;0.55" dur="3.5s" repeatCount="indefinite"/></circle>
+          <!-- 十字星光 -->
+          <g transform="translate(24,24)" opacity="0.6">
+            <animate attributeName="opacity" values="0.6;0;0.6" dur="1.5s" repeatCount="indefinite"/>
+            <line x1="0" y1="-5" x2="0" y2="5" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/>
+            <line x1="-5" y1="0" x2="5" y2="0" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/>
+          </g>
+          <g transform="translate(95,22)" opacity="0.5">
+            <animate attributeName="opacity" values="0.5;0;0.5" dur="2.2s" repeatCount="indefinite"/>
+            <line x1="0" y1="-4" x2="0" y2="4" stroke="#fff" stroke-width="0.7" stroke-linecap="round"/>
+            <line x1="-4" y1="0" x2="4" y2="0" stroke="#fff" stroke-width="0.7" stroke-linecap="round"/>
+          </g>
+          <g transform="translate(20,95)" opacity="0.45">
+            <animate attributeName="opacity" values="0.45;0;0.45" dur="2.7s" repeatCount="indefinite"/>
+            <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="#fff" stroke-width="0.7" stroke-linecap="round"/>
+            <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="#fff" stroke-width="0.7" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="setup-header">
+        <h1>偶像身份设定</h1>
+        <p>在开始你的偶像生活之前<br>先定义你的角色吧</p>
+      </div>
+
+      <div class="setup-form">
+        <div class="form-row">
+          <label class="form-label">艺名 <span class="required">*</span></label>
+          <input type="text" id="setStageName" class="form-input" placeholder="例：花音" maxlength="12" />
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">本名</label>
+          <input type="text" id="setRealName" class="form-input" placeholder="例：金智秀（选填）" maxlength="12" />
+        </div>
+
+        <div class="form-row form-row-split">
+          <div class="form-col">
+            <label class="form-label">年龄 <span class="required">*</span></label>
+            <input type="number" id="setAge" class="form-input" placeholder="20" min="15" max="35" />
+          </div>
+          <div class="form-col">
+            <label class="form-label">身高 (cm)</label>
+            <input type="number" id="setHeight" class="form-input" placeholder="165" min="145" max="195" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">出道年份 <span class="required">*</span></label>
+          <input type="number" id="setDebutYear" class="form-input" placeholder="例：2022" min="2010" max="2026" />
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">身份类型</label>
+          <div class="option-row" id="idolType">
+            <span class="opt-chip" data-value="solo">Solo 歌手</span>
+            <span class="opt-chip active" data-value="group">组合成员</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">代表性格</label>
+          <div class="option-row" id="personality">
+            <span class="opt-chip" data-value="sweet">甜美</span>
+            <span class="opt-chip active" data-value="energetic">元气</span>
+            <span class="opt-chip" data-value="mature">成熟</span>
+            <span class="opt-chip" data-value="calm">冷静</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="form-label">所属组合/公司（选填）</label>
+          <input type="text" id="setGroup" class="form-input" placeholder="例：STARSHIP / HYBE" maxlength="20" />
+        </div>
+      </div>
+
+      <button class="setup-btn" id="setupBtn">✦ 进入我的偶像生活</button>
+      <p class="setup-hint" id="setupHint"></p>
+    </div>
+
+    <!-- 安装引导条 -->
+    <div class="install-banner" id="installBanner">
+      <div class="install-banner-icon">
+        <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="60" height="60" rx="14" fill="#2d2658" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+          <text x="30" y="38" text-anchor="middle" font-size="18" font-weight="700" fill="#fff" font-family="sans-serif" letter-spacing="1">idol</text>
+        </svg>
+      </div>
+      <div class="install-banner-text">
+        <div class="install-banner-title" id="installTitle">安装到主屏幕</div>
+        <div class="install-banner-desc" id="installDesc">像原生 App 一样打开，体验更好</div>
+      </div>
+      <button class="install-banner-btn" id="installBtn">安装</button>
+    </div>
+  </div>
+
+  <!-- ====== 手机主界面 ====== -->
+  <div class="phone-container" id="phoneContainer">
+
+    <!-- 状态栏 -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <span class="status-icons">▮▮▮▮ ▮▮▮▮ 100%</span>
+    </div>
+
+    <!-- ====== 主屏幕（应用桌面） ====== -->
+    <div class="home-screen" id="homeScreen">
+      <div class="home-top-row">
+        <span class="home-greeting" id="homeGreeting">花音</span>
+        <button class="home-settings-btn" id="homeSettingsBtn" title="修改身份设定">⚙</button>
+      </div>
+      <div class="folder-label">社交</div>
+      <div class="folder-area">
+        <div class="app-grid">
+
+          <!-- KakaoTalk -->
+          <div class="app-item" data-app="kakaotalk">
+            <div class="app-icon kakaotalk">
+              <svg viewBox="0 0 68 68" class="icon-svg">
+                <rect x="0" y="0" width="68" height="68" rx="17" fill="#FEE500"/>
+                <path d="M34 12c-11 0-20 7-20 15.5S23 43 34 43c1.5 0 3-.2 4.3-.5l7 3.5c.4.2.8-.2.7-.6l-1.2-5.5c4.5-2.2 7.2-6.5 7.2-11.4S45 12 34 12z" fill="#fff"/>
+                <circle cx="25.5" cy="27.5" r="1.8" fill="#3A1D1D"/>
+                <circle cx="34.5" cy="27.5" r="1.8" fill="#3A1D1D"/>
+                <path d="M27.5 32.5c2 2 3.5 2 5.5 0" fill="none" stroke="#3A1D1D" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="22" cy="31" r="2.5" fill="#FFB3B3" opacity=".4"/>
+                <circle cx="38" cy="31" r="2.5" fill="#FFB3B3" opacity=".4"/>
+              </svg>
+            </div>
+            <span class="app-name">KakaoTalk</span>
+          </div>
+
+          <!-- Instagram -->
+          <div class="app-item" data-app="instagram">
+            <div class="app-icon instagram">
+              <svg viewBox="0 0 68 68" class="icon-svg">
+                <defs>
+                  <linearGradient id="ig-grad" x1="0" y1="1" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#FCAF45"/>
+                    <stop offset="25%" stop-color="#E1306C"/>
+                    <stop offset="55%" stop-color="#833AB4"/>
+                    <stop offset="100%" stop-color="#405DE6"/>
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="68" height="68" rx="17" fill="url(#ig-grad)"/>
+                <rect x="15" y="15" width="38" height="38" rx="10" fill="none" stroke="#fff" stroke-width="3.2"/>
+                <circle cx="34" cy="34" r="8.5" fill="none" stroke="#fff" stroke-width="3.2"/>
+                <circle cx="44" cy="24" r="2.8" fill="#fff"/>
+              </svg>
+            </div>
+            <span class="app-name">Instagram</span>
+          </div>
+
+          <!-- 微信 -->
+          <div class="app-item" data-app="wechat">
+            <div class="app-icon wechat">
+              <svg viewBox="0 0 68 68" class="icon-svg">
+                <rect x="0" y="0" width="68" height="68" rx="18" fill="#2BBF6A"/>
+                <ellipse cx="43" cy="31" rx="15" ry="12" fill="#fff"/>
+                <ellipse cx="27" cy="37" rx="19" ry="16" fill="#fff"/>
+                <circle cx="20" cy="33.5" r="2.5" fill="#1a1a1a"/>
+                <circle cx="30" cy="33.5" r="2.5" fill="#1a1a1a"/>
+                <path d="M21.5 41c2.5 2.5 5.5 2.5 8 0" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="37" cy="27.5" r="1.6" fill="#1a1a1a"/>
+                <circle cx="45" cy="27.5" r="1.6" fill="#1a1a1a"/>
+                <path d="M38.5 32c1.5 1.5 3.5 1.5 5 .3" fill="none" stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="app-name">微信</span>
+          </div>
+
+          <!-- X (Twitter) -->
+          <div class="app-item" data-app="twitter">
+            <div class="app-icon twitter">
+              <svg viewBox="0 0 68 68" class="icon-svg">
+                <rect x="0" y="0" width="68" height="68" rx="17" fill="#000"/>
+                <path d="M35 31.5L46 18h-2.8l-9 11.3L27 18H17l11.5 15.8L17 46.5h2.8l9.5-11 7.7 11H47L35 31.5zm-3.8 3.8l-1-1.5L20 20.5h3.5l7 9.8 1 1.5 9.5 13h-3.5l-8.3-11.5z" fill="#fff"/>
+              </svg>
+            </div>
+            <span class="app-name">X</span>
+          </div>
+
+          <!-- Bubble -->
+          <div class="app-item" data-app="bubble">
+            <div class="app-icon bubble">
+              <svg viewBox="0 0 68 68" class="icon-svg">
+                <defs>
+                  <linearGradient id="bb-grad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#FF8BB8"/>
+                    <stop offset="40%" stop-color="#FF6BA6"/>
+                    <stop offset="100%" stop-color="#C44569"/>
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="68" height="68" rx="17" fill="url(#bb-grad)"/>
+                <path d="M34 16c-8 0-14.5 5.2-14.5 11.5s4.5 9 9 10.5l-.5 4c-.1.3.2.6.5.4l5.5-3.5c1 .2 2 .3 3 .3 8 0 14.5-5.2 14.5-11.5S42 16 34 16z" fill="#fff"/>
+                <path d="M34 28.5c-.2 0-.5-.1-.6-.3l-1.2-1.3c-1.5-1.5-2.5-2.6-2.5-3.8 0-1.2 1-2.2 2.2-2.2.7 0 1.4.3 1.8.8l.3.3.3-.3c.4-.5 1.1-.8 1.8-.8 1.2 0 2.2 1 2.2 2.2 0 1.2-1 2.3-2.5 3.8l-1.2 1.3c-.1.2-.4.3-.6.3z" fill="#FF4088"/>
+              </svg>
+            </div>
+            <span class="app-name">Bubble</span>
+          </div>
+
+        </div>
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+
+    <!-- ====== 应用视图（打开后显示） ====== -->
+    <div class="app-view" id="appView">
+
+      <!-- 顶部导航 -->
+      <div class="app-nav" id="appNav">
+        <button class="nav-back" id="navBack">
+          <span class="back-arrow">‹</span>
+        </button>
+        <span class="nav-title" id="navTitle">KakaoTalk</span>
+        <span class="nav-action" id="navAction"></span>
+      </div>
+
+      <!-- 内容区 -->
+      <div class="app-content" id="appContent">
+
+        <!-- 聊天列表页 -->
+        <div class="screen screen-chatlist" id="screenChatlist">
+          <div class="chatlist-scroll">
+            <div class="chatlist-items" id="chatlistItems"></div>
+          </div>
+        </div>
+
+        <!-- 动态/朋友圈页 -->
+        <div class="screen screen-feed hidden" id="screenFeed">
+          <div class="feed-scroll">
+            <div class="feed-items" id="feedItems"></div>
+          </div>
+        </div>
+
+        <!-- 对话详情页 -->
+        <div class="screen screen-conversation hidden" id="screenConversation">
+          <div class="conv-messages" id="convMessages"></div>
+          <div class="conv-input-bar">
+            <input type="text" class="conv-input" id="convInput" placeholder="输入消息..." autocomplete="off" />
+            <button class="conv-send" id="convSend">
+              <span>↑</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 底部 Tab 栏 -->
+      <div class="app-tabs" id="appTabs"></div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js");
+    }
+  </script>
+</body>
+</html>

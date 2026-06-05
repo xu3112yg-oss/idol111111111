@@ -1,0 +1,46 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="logoBg" cx="40%" cy="30%">
+      <stop offset="0%" stop-color="#2d2658"/>
+      <stop offset="100%" stop-color="#0f0f1a"/>
+    </radialGradient>
+    <linearGradient id="logoText" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="45%" stop-color="#d4d4d4"/>
+      <stop offset="100%" stop-color="#999999"/>
+    </linearGradient>
+    <filter id="logoGlow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 圆角方形底 -->
+  <rect x="0" y="0" width="120" height="120" rx="28" fill="url(#logoBg)" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
+  <!-- 内光晕 -->
+  <rect x="6" y="6" width="108" height="108" rx="23" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+  <!-- idol 字样 -->
+  <text x="60" y="73" text-anchor="middle" font-size="36" font-weight="700" font-family="'Segoe UI', -apple-system, sans-serif" fill="url(#logoText)" filter="url(#logoGlow)" letter-spacing="3">idol</text>
+  <!-- 星光粒子 -->
+  <circle cx="22" cy="22" r="2" fill="#fff" opacity="0.8"><animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite"/></circle>
+  <circle cx="96" cy="18" r="1.5" fill="#fff" opacity="0.6"><animate attributeName="opacity" values="0.6;0.1;0.6" dur="2.5s" repeatCount="indefinite"/></circle>
+  <circle cx="18" cy="98" r="1.8" fill="#fff" opacity="0.5"><animate attributeName="opacity" values="0.5;0.15;0.5" dur="3.2s" repeatCount="indefinite"/></circle>
+  <circle cx="100" cy="95" r="1.2" fill="#fff" opacity="0.7"><animate attributeName="opacity" values="0.7;0.2;0.7" dur="1.8s" repeatCount="indefinite"/></circle>
+  <circle cx="40" cy="12" r="1" fill="#fff" opacity="0.4"><animate attributeName="opacity" values="0.4;0.1;0.4" dur="2.8s" repeatCount="indefinite"/></circle>
+  <circle cx="78" cy="102" r="1.4" fill="#fff" opacity="0.55"><animate attributeName="opacity" values="0.55;0.1;0.55" dur="3.5s" repeatCount="indefinite"/></circle>
+  <!-- 十字星光 -->
+  <g transform="translate(24,24)" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;0;0.6" dur="1.5s" repeatCount="indefinite"/>
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/>
+    <line x1="-5" y1="0" x2="5" y2="0" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(95,22)" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;0;0.5" dur="2.2s" repeatCount="indefinite"/>
+    <line x1="0" y1="-4" x2="0" y2="4" stroke="#fff" stroke-width="0.7" stroke-linecap="round"/>
+    <line x1="-4" y1="0" x2="4" y2="0" stroke="#fff" stroke-width="0.7" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(20,95)" opacity="0.45">
+    <animate attributeName="opacity" values="0.45;0;0.45" dur="2.7s" repeatCount="indefinite"/>
+    <line x1="0" y1="-3.5" x2="0" y2="3.5" stroke="#fff" stroke-width="0.7" stroke-linecap="round"/>
+    <line x1="-3.5" y1="0" x2="3.5" y2="0" stroke="#fff" stroke-width="0.7" stroke-linecap="round"/>
+  </g>
+</svg>

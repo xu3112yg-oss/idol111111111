@@ -1,0 +1,807 @@
+/* ===== 基础 ===== */
+:root {
+  --phone-w: 390px;
+  --phone-h: 844px;
+  --phone-radius: 44px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #1a1a2e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none; -webkit-user-select: none;
+}
+
+/* ===== 偶像设定页 ===== */
+.setup-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: radial-gradient(ellipse at 50% 0%, #1e1b4b 0%, #0f0f1a 60%, #000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity .5s ease, transform .5s ease;
+}
+.setup-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.05);
+}
+
+.setup-card {
+  width: 100%;
+  max-width: 360px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 28px;
+  padding: 32px 24px 28px;
+  box-shadow: 0 25px 60px rgba(0,0,0,.5);
+  -webkit-overflow-scrolling: touch;
+}
+
+.setup-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* App 图标 */
+.app-logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.app-logo {
+  width: 100px;
+  height: 100px;
+  filter: drop-shadow(0 8px 24px rgba(100,80,180,.35));
+}
+
+.setup-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 6px;
+}
+.setup-header p {
+  font-size: 13px;
+  color: rgba(255,255,255,.4);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.setup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-row-split {
+  flex-direction: row;
+  gap: 12px;
+}
+.form-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,.55);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.form-label .required { color: #FF6BA6; }
+
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  transition: border-color .2s, background .2s;
+  font-family: inherit;
+}
+.form-input:focus {
+  border-color: rgba(255,107,166,.4);
+  background: rgba(255,255,255,.06);
+}
+.form-input::placeholder { color: rgba(255,255,255,.18); }
+
+/* 选项芯片 */
+.option-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.opt-chip {
+  padding: 9px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.03);
+  color: rgba(255,255,255,.5);
+  transition: all .18s;
+}
+.opt-chip:hover { background: rgba(255,255,255,.08); color: rgba(255,255,255,.7); }
+.opt-chip.active {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(255,255,255,.25);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(255,107,166,.15);
+}
+
+/* 进入按钮 */
+.setup-btn {
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #FF6BA6, #C44569);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  letter-spacing: .5px;
+  box-shadow: 0 8px 30px rgba(196,69,105,.3);
+}
+.setup-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 36px rgba(196,69,105,.4); }
+.setup-btn:active { transform: translateY(0); }
+.setup-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.setup-hint {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255,255,255,.25);
+  margin-top: 12px;
+  min-height: 16px;
+}
+
+/* ===== 安装引导条 ===== */
+.install-banner {
+  width: 100%;
+  max-width: 360px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: opacity .3s, transform .3s;
+}
+.install-banner.dismissed {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+.install-banner-icon {
+  flex-shrink: 0;
+}
+.install-banner-icon svg {
+  width: 48px;
+  height: 48px;
+}
+.install-banner-text {
+  flex: 1;
+  min-width: 0;
+}
+.install-banner-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+.install-banner-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  margin-top: 2px;
+}
+.install-banner-btn {
+  padding: 9px 18px;
+  border-radius: 18px;
+  border: none;
+  background: linear-gradient(135deg, #FF6BA6, #C44569);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform .12s, box-shadow .12s;
+  min-width: 0;
+  box-shadow: 0 4px 14px rgba(196,69,105,.3);
+}
+.install-banner-btn:hover { transform: translateY(-1px); }
+.install-banner-btn:active { transform: translateY(0); }
+.install-banner-btn.ios-guide {
+  background: rgba(255,255,255,.1);
+  color: rgba(255,255,255,.6);
+  box-shadow: none;
+  font-weight: 500;
+}
+
+/* ---- 首页顶部行 ---- */
+.home-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 320px;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+.home-greeting {
+  color: rgba(255,255,255,.7);
+  font-size: 14px;
+  font-weight: 500;
+}
+.home-settings-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.5);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, color .15s;
+  min-width: 0;
+  padding: 0;
+}
+.home-settings-btn:hover { background: rgba(255,255,255,.15); color: #fff; }
+
+/* 手机容器初始隐藏 */
+#phoneContainer { display: none; }
+#phoneContainer.ready { display: flex; }
+
+/* ===== 手机外壳 ===== */
+.phone-container {
+  width: var(--phone-w);
+  height: var(--phone-h);
+  background: #000;
+  border-radius: var(--phone-radius);
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 3px #1a1a1a, 0 0 0 6px #222, 0 0 0 8px #111, 0 20px 60px rgba(0,0,0,.5);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== 状态栏 ===== */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px 6px 28px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  z-index: 30;
+  position: relative;
+  pointer-events: none;
+}
+
+/* ===== 主屏幕 ===== */
+.home-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #1c1c1e 0%, #000 100%);
+  padding-bottom: 30px;
+  transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .35s ease;
+}
+.home-screen.hidden { transform: scale(.92); opacity: 0; pointer-events: none; }
+
+.folder-label { color: #fff; font-size: 20px; font-weight: 600; margin-bottom: 16px; letter-spacing: .5px; }
+
+.folder-area {
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-radius: 28px;
+  padding: 24px 20px 20px 20px;
+  width: 320px;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px 16px;
+}
+
+.app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform .15s ease;
+}
+.app-item:active { transform: scale(.88); }
+
+.app-icon {
+  position: relative;
+  width: 68px; height: 68px;
+  border-radius: 17px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.15);
+}
+.icon-svg { display: block; width: 100%; height: 100%; }
+
+.app-name {
+  color: #fff; font-size: 11px; font-weight: 500; letter-spacing: .2px;
+  text-align: center; max-width: 72px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.app-icon.kakaotalk { background: #FEE500; }
+.app-icon.instagram  { background: linear-gradient(135deg, #FCAF45, #E1306C, #833AB4, #405DE6); }
+.app-icon.wechat     { background: #2BBF6A; }
+.app-icon.twitter    { background: #000; }
+.app-icon.bubble     { background: linear-gradient(135deg, #FF85B3, #FF6BA6, #C44569); }
+
+.home-indicator {
+  width: 134px; height: 5px; background: rgba(255,255,255,.35);
+  border-radius: 3px; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+}
+
+/* =============================================
+   应用视图（打开 App 后）
+   ============================================= */
+.app-view {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; flex-direction: column;
+  background: #000;
+  transform: translateX(100%);
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+  border-radius: var(--phone-radius);
+  overflow: hidden;
+  z-index: 20;
+  padding-top: 50px;
+}
+.app-view.active { transform: translateX(0); }
+
+/* ---- 导航栏 ---- */
+.app-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px 0 12px;
+  height: 46px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.nav-back {
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%;
+  color: inherit; font-size: 28px; line-height: 1; font-weight: 300;
+  transition: background .15s;
+  min-width: 0; padding: 0;
+}
+.nav-back:hover { background: rgba(255,255,255,.1); }
+
+.nav-title {
+  font-size: 17px; font-weight: 600;
+  position: absolute; left: 50%; transform: translateX(-50%);
+  pointer-events: none;
+  max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.nav-action {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; opacity: .7;
+}
+
+/* ---- 内容区 ---- */
+.app-content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.screen {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.screen.hidden { opacity: 0; pointer-events: none; transform: translateY(4px); }
+
+/* ---- 聊天列表 ---- */
+.chatlist-scroll, .feed-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chatlist-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background .12s;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+}
+.chatlist-item:hover { background: rgba(255,255,255,.03); }
+.chatlist-item:active { background: rgba(255,255,255,.06); }
+
+.chatlist-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700; color: #fff;
+}
+.chatlist-info { flex: 1; min-width: 0; }
+.chatlist-name { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.chatlist-preview {
+  font-size: 13px; opacity: .55;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.chatlist-meta { text-align: right; flex-shrink: 0; }
+.chatlist-time { font-size: 11px; opacity: .4; margin-bottom: 4px; }
+.chatlist-badge {
+  display: inline-block;
+  min-width: 18px; height: 18px; line-height: 18px;
+  background: #ff3b30; color: #fff;
+  font-size: 11px; font-weight: 600; text-align: center;
+  border-radius: 9px; padding: 0 5px;
+}
+
+/* ---- 动态/朋友圈 ---- */
+.feed-item {
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  animation: fadeUp .3s ease;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.feed-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px 8px;
+}
+.feed-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 700; color: #fff;
+}
+.feed-user { font-size: 14px; font-weight: 600; }
+.feed-time { font-size: 11px; opacity: .4; margin-top: 2px; }
+
+.feed-body {
+  padding: 0 16px 12px;
+  font-size: 14px; line-height: 1.6;
+}
+
+.feed-image {
+  margin: 0 16px 12px;
+  height: 180px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px;
+  overflow: hidden;
+}
+
+.feed-actions {
+  display: flex; gap: 20px;
+  padding: 4px 16px 14px;
+  font-size: 12px; opacity: .5;
+}
+
+/* ---- 对话页 ---- */
+.conv-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 14px;
+  display: flex; flex-direction: column;
+  gap: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.conv-date-divider {
+  text-align: center;
+  font-size: 11px; opacity: .35;
+  padding: 8px 0;
+}
+
+.conv-msg {
+  max-width: 78%;
+  padding: 9px 13px;
+  border-radius: 17px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  word-break: break-word;
+  animation: msgIn .25s ease-out;
+  position: relative;
+}
+@keyframes msgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+.conv-msg.from { align-self: flex-start; border-bottom-left-radius: 5px; }
+.conv-msg.to   { align-self: flex-end;   border-bottom-right-radius: 5px; }
+
+/* 翻译按钮 */
+.msg-translate-btn {
+  display: block;
+  margin-top: 5px;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 0.5px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.04);
+  color: inherit;
+  opacity: .45;
+  cursor: pointer;
+  width: fit-content;
+  transition: opacity .15s, background .15s;
+  font-family: inherit;
+}
+.msg-translate-btn:hover { opacity: .8; background: rgba(255,255,255,.1); }
+.msg-translate-btn.translated { opacity: .7; }
+
+.msg-translation {
+  display: none;
+  margin-top: 5px;
+  font-size: 12px;
+  opacity: .65;
+  padding: 4px 8px;
+  border-left: 2px solid rgba(255,255,255,.2);
+  line-height: 1.5;
+}
+.msg-translation.show { display: block; }
+
+.conv-input-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px 10px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.conv-input {
+  flex: 1;
+  border: none; border-radius: 20px;
+  padding: 9px 14px;
+  font-size: 14px;
+  outline: none;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+}
+.conv-input::placeholder { opacity: .35; }
+.conv-send {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 700;
+  transition: transform .12s;
+  min-width: 0; padding: 0;
+}
+.conv-send:active { transform: scale(.9); }
+
+/* ---- 底部 Tab 栏 ---- */
+.app-tabs {
+  display: flex;
+  height: 50px;
+  flex-shrink: 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.tab-item {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  font-size: 10px; font-weight: 500;
+  opacity: .45;
+  transition: opacity .15s;
+}
+.tab-item:hover { opacity: .7; }
+.tab-item.active { opacity: 1; font-weight: 600; }
+.tab-icon { font-size: 20px; line-height: 1; }
+
+/* =============================================
+   主题: KakaoTalk
+   ============================================= */
+.app-view.theme-kakaotalk .app-nav { background: #FEE500; border-bottom-color: rgba(0,0,0,.06); }
+.app-view.theme-kakaotalk .app-nav .nav-back { color: #191919; }
+.app-view.theme-kakaotalk .nav-title { color: #191919; }
+.app-view.theme-kakaotalk .screen-chatlist { background: #B2C7DA; }
+.app-view.theme-kakaotalk .chatlist-name { color: #191919; }
+.app-view.theme-kakaotalk .chatlist-preview { color: #3d4a55; opacity: 1; }
+.app-view.theme-kakaotalk .chatlist-time { color: #5a6b78; opacity: 1; }
+.app-view.theme-kakaotalk .chatlist-item { border-bottom-color: rgba(0,0,0,.06); }
+.app-view.theme-kakaotalk .chatlist-item:hover { background: rgba(0,0,0,.03); }
+.app-view.theme-kakaotalk .chatlist-item:active { background: rgba(0,0,0,.06); }
+.app-view.theme-kakaotalk .screen-feed { background: #f5f5f7; }
+.app-view.theme-kakaotalk .feed-item { border-bottom-color: rgba(0,0,0,.06); }
+.app-view.theme-kakaotalk .feed-user { color: #191919; }
+.app-view.theme-kakaotalk .feed-body { color: #333; }
+.app-view.theme-kakaotalk .feed-time { color: #888; opacity: 1; }
+.app-view.theme-kakaotalk .feed-image { background: linear-gradient(135deg, #FEE500, #ffb347); }
+.app-view.theme-kakaotalk .feed-actions { color: #666; opacity: 1; }
+.app-view.theme-kakaotalk .conv-messages { background: #B2C7DA; }
+.app-view.theme-kakaotalk .conv-msg.from { background: #fff; color: #191919; }
+.app-view.theme-kakaotalk .conv-msg.to { background: #FEE500; color: #191919; }
+.app-view.theme-kakaotalk .conv-input { background: #fff; color: #191919; }
+.app-view.theme-kakaotalk .conv-input::placeholder { color: rgba(0,0,0,.3); }
+.app-view.theme-kakaotalk .conv-send { background: #FEE500; color: #191919; }
+.app-view.theme-kakaotalk .msg-translate-btn { border-color: rgba(0,0,0,.12); background: rgba(0,0,0,.03); }
+.app-view.theme-kakaotalk .msg-translate-btn:hover { background: rgba(0,0,0,.08); }
+.app-view.theme-kakaotalk .app-tabs { background: #f9f9fb; border-top-color: rgba(0,0,0,.06); }
+.app-view.theme-kakaotalk .tab-item { color: #5a6b78; }
+.app-view.theme-kakaotalk .tab-item.active { color: #191919; }
+.app-view.theme-kakaotalk .chatlist-avatar { background: linear-gradient(135deg, #979797, #bbb); }
+
+/* =============================================
+   主题: Instagram
+   ============================================= */
+.app-view.theme-instagram .app-nav { background: #000; border-bottom-color: #222; }
+.app-view.theme-instagram .app-nav .nav-back { color: #fff; }
+.app-view.theme-instagram .nav-title { color: #fff; font-family: cursive; }
+.app-view.theme-instagram .screen-chatlist { background: #0d0d0d; }
+.app-view.theme-instagram .chatlist-name { color: #f5f5f5; }
+.app-view.theme-instagram .chatlist-preview { color: #999; }
+.app-view.theme-instagram .chatlist-item { border-bottom-color: #1a1a1a; }
+.app-view.theme-instagram .chatlist-item:hover { background: #111; }
+.app-view.theme-instagram .chatlist-item:active { background: #1a1a1a; }
+.app-view.theme-instagram .screen-feed { background: #000; }
+.app-view.theme-instagram .feed-item { border-bottom-color: #1a1a1a; }
+.app-view.theme-instagram .feed-user { color: #f5f5f5; }
+.app-view.theme-instagram .feed-body { color: #e5e5e5; }
+.app-view.theme-instagram .feed-image { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.app-view.theme-instagram .conv-messages { background: #0d0d0d; }
+.app-view.theme-instagram .conv-msg.from { background: #262626; color: #f5f5f5; }
+.app-view.theme-instagram .conv-msg.to { background: linear-gradient(135deg, #dc2743, #cc2366); color: #fff; }
+.app-view.theme-instagram .conv-input { background: #1a1a1a; border: 1px solid #333; }
+.app-view.theme-instagram .conv-send { background: #dc2743; color: #fff; }
+.app-view.theme-instagram .app-tabs { background: #000; border-top-color: #1a1a1a; }
+.app-view.theme-instagram .tab-item { color: #888; }
+.app-view.theme-instagram .tab-item.active { color: #fff; }
+.app-view.theme-instagram .chatlist-avatar { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366); }
+
+/* =============================================
+   主题: 微信
+   ============================================= */
+.app-view.theme-wechat .app-nav { background: #191919; border-bottom-color: #222; }
+.app-view.theme-wechat .app-nav .nav-back { color: #fff; }
+.app-view.theme-wechat .nav-title { color: #fff; }
+.app-view.theme-wechat .screen-chatlist { background: #111; }
+.app-view.theme-wechat .chatlist-name { color: #e5e5e5; }
+.app-view.theme-wechat .chatlist-preview { color: #777; }
+.app-view.theme-wechat .chatlist-item { border-bottom-color: #1c1c1c; }
+.app-view.theme-wechat .chatlist-item:hover { background: #161616; }
+.app-view.theme-wechat .screen-feed { background: #111; }
+.app-view.theme-wechat .feed-header { padding-top: 16px; }
+.app-view.theme-wechat .feed-item { border-bottom-color: #1c1c1c; }
+.app-view.theme-wechat .feed-user { color: #4876FF; }
+.app-view.theme-wechat .feed-body { color: #ddd; }
+.app-view.theme-wechat .feed-image { background: linear-gradient(135deg, #2BBF6A, #07C160); }
+.app-view.theme-wechat .conv-messages { background: #111; }
+.app-view.theme-wechat .conv-msg.from { background: #262626; color: #e5e5e5; }
+.app-view.theme-wechat .conv-msg.to { background: #2BBF6A; color: #fff; }
+.app-view.theme-wechat .conv-input { background: #1a1a1a; }
+.app-view.theme-wechat .conv-send { background: #2BBF6A; color: #fff; }
+.app-view.theme-wechat .app-tabs { background: #191919; border-top-color: #1c1c1c; }
+.app-view.theme-wechat .tab-item { color: #888; }
+.app-view.theme-wechat .tab-item.active { color: #2BBF6A; }
+.app-view.theme-wechat .chatlist-avatar { background: linear-gradient(135deg, #2BBF6A, #07C160); }
+
+/* =============================================
+   主题: X
+   ============================================= */
+.app-view.theme-twitter .app-nav { background: #000; border-bottom-color: #222; }
+.app-view.theme-twitter .app-nav .nav-back { color: #fff; }
+.app-view.theme-twitter .nav-title { color: #fff; }
+.app-view.theme-twitter .screen-chatlist { background: #000; }
+.app-view.theme-twitter .chatlist-name { color: #e7e9ea; }
+.app-view.theme-twitter .chatlist-preview { color: #71767b; }
+.app-view.theme-twitter .chatlist-item { border-bottom-color: #16181c; }
+.app-view.theme-twitter .chatlist-item:hover { background: #080808; }
+.app-view.theme-twitter .screen-feed { background: #000; }
+.app-view.theme-twitter .feed-item { border-bottom-color: #16181c; }
+.app-view.theme-twitter .feed-user { color: #e7e9ea; }
+.app-view.theme-twitter .feed-body { color: #e7e9ea; font-size: 15px; }
+.app-view.theme-twitter .feed-image { background: #1d9bf0; }
+.app-view.theme-twitter .conv-messages { background: #000; }
+.app-view.theme-twitter .conv-msg.from { background: #16181c; color: #e7e9ea; }
+.app-view.theme-twitter .conv-msg.to { background: #1d9bf0; color: #fff; }
+.app-view.theme-twitter .conv-input { background: #16181c; }
+.app-view.theme-twitter .conv-send { background: #1d9bf0; color: #fff; }
+.app-view.theme-twitter .app-tabs { background: #000; border-top-color: #16181c; }
+.app-view.theme-twitter .tab-item { color: #71767b; }
+.app-view.theme-twitter .tab-item.active { color: #1d9bf0; }
+.app-view.theme-twitter .chatlist-avatar { background: #1d9bf0; }
+.app-view.theme-twitter .feed-username-handle { color: #71767b; font-size: 13px; font-weight: 400; }
+
+/* =============================================
+   主题: Bubble
+   ============================================= */
+.app-view.theme-bubble .app-nav { background: #1a1a2e; border-bottom: 1px solid rgba(255,107,166,.15); }
+.app-view.theme-bubble .app-nav .nav-back { color: #fff; }
+.app-view.theme-bubble .nav-title { color: #ffb3d0; }
+.app-view.theme-bubble .screen-chatlist { background: #12121f; }
+.app-view.theme-bubble .chatlist-name { color: #f0f0f0; }
+.app-view.theme-bubble .chatlist-preview { color: #777; }
+.app-view.theme-bubble .chatlist-item { border-bottom-color: rgba(255,107,166,.08); }
+.app-view.theme-bubble .chatlist-item:hover { background: rgba(255,107,166,.04); }
+.app-view.theme-bubble .screen-feed { background: #12121f; }
+.app-view.theme-bubble .feed-item { border-bottom-color: rgba(255,107,166,.08); }
+.app-view.theme-bubble .feed-user { color: #ffb3d0; }
+.app-view.theme-bubble .feed-body { color: #e0d0d8; }
+.app-view.theme-bubble .feed-body .bubble-post {
+  background: linear-gradient(135deg, rgba(255,107,166,.2), rgba(196,69,105,.2));
+  border-radius: 18px 18px 18px 4px;
+  padding: 14px 16px;
+  display: inline-block;
+}
+.app-view.theme-bubble .feed-actions { color: rgba(255,107,166,.6); }
+.app-view.theme-bubble .conv-messages { background: #12121f; }
+.app-view.theme-bubble .conv-msg.from { background: #2a2a40; color: #f0f0f0; }
+.app-view.theme-bubble .conv-msg.to { background: linear-gradient(135deg, #FF6BA6, #C44569); color: #fff; }
+.app-view.theme-bubble .conv-input { background: #1a1a30; border: 1px solid rgba(255,107,166,.15); }
+.app-view.theme-bubble .conv-send { background: #FF6BA6; color: #fff; }
+.app-view.theme-bubble .app-tabs { background: #1a1a2e; border-top-color: rgba(255,107,166,.1); }
+.app-view.theme-bubble .tab-item { color: #777; }
+.app-view.theme-bubble .tab-item.active { color: #FF6BA6; }
+.app-view.theme-bubble .chatlist-avatar { background: linear-gradient(135deg, #FF6BA6, #C44569); }
+
+/* =============================================
+   响应式
+   ============================================= */
+@media (max-width: 500px), (max-height: 700px) {
+  body { align-items: stretch; background: #000; }
+  .phone-container {
+    width: 100vw; height: 100vh; height: 100dvh;
+    border-radius: 0; box-shadow: none;
+  }
+  .app-view { border-radius: 0; }
+  .status-bar { padding: env(safe-area-inset-top, 8px) 24px 4px 24px; }
+  .home-screen { padding-bottom: env(safe-area-inset-bottom, 20px); }
+  .conv-input-bar { padding-bottom: calc(10px + env(safe-area-inset-bottom, 8px)); }
+  .app-tabs { padding-bottom: env(safe-area-inset-bottom, 0); height: calc(50px + env(safe-area-inset-bottom, 0)); }
+}
+
+@media (min-width: 501px) and (max-width: 420px) {
+  .folder-area { width: 290px; padding: 20px 16px 16px; }
+  .app-icon { width: 60px; height: 60px; border-radius: 14px; }
+  .app-grid { gap: 16px 12px; }
+}

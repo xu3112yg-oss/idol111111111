@@ -1,0 +1,18 @@
+{
+  "name": "idol — 偶像生活模拟器",
+  "short_name": "idol",
+  "description": "文字聊天式偶像日常互动体验",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f0f1a",
+  "theme_color": "#0f0f1a",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
