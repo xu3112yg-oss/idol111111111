@@ -29,8 +29,6 @@ const installDesc     = $("#installDesc");
 const globalInstallBar = $("#globalInstallBar");
 const gibText          = $("#gibText");
 const gibBtn           = $("#gibBtn");
-let deferredPrompt = null;
-let globalBarDismissed = false;
 
 // 应用内
 const homeScreen    = $("#homeScreen");
@@ -883,409 +881,143 @@ homeSettingsBtn.addEventListener("click", () => {
 });
 
 // =============================================
-// PWA 安装引导（全浏览器 + 全局安装条）
+// PWA 安装引导（简化版，全浏览器兼容）
 // =============================================
+let deferredPrompt = null;
+let globalBarDismissed = false;
 let installHandled = false;
 
 function detectPlatform() {
-  const ua = navigator.userAgent || "";
-  const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  const isAndroid = /Android/.test(ua);
-
-  if (isIOS) {
-    if (/CriOS/.test(ua))  return { os: "ios", browser: "chrome" };
-    if (/FxiOS/.test(ua))  return { os: "ios", browser: "firefox" };
-    if (/EdgiOS/.test(ua)) return { os: "ios", browser: "edge" };
-    if (/Safari/.test(ua)) return { os: "ios", browser: "safari" };
-    return { os: "ios", browser: "other" };
+  var ua = navigator.userAgent || "";
+  if (/iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) {
+    return { os: "ios", browser: /CriOS/.test(ua) ? "chrome" : /FxiOS/.test(ua) ? "firefox" : /EdgiOS/.test(ua) ? "edge" : "safari" };
   }
-  if (isAndroid) {
-    if (/SamsungBrowser/.test(ua)) return { os: "android", browser: "samsung" };
-    if (/EdgA\//.test(ua) || /Edg\//.test(ua)) return { os: "android", browser: "edge" };
-    if (/Firefox/.test(ua) && !/Chrome/.test(ua)) return { os: "android", browser: "firefox" };
-    if (/Kiwi/.test(ua))   return { os: "android", browser: "kiwi" };
-    if (/Brave/.test(ua))  return { os: "android", browser: "brave" };
-    if (/Chrome/.test(ua)) return { os: "android", browser: "chrome" };
-    return { os: "android", browser: "other" };
+  if (/Android/.test(ua)) {
+    return { os: "android", browser: /SamsungBrowser/.test(ua) ? "samsung" : /Firefox/.test(ua) && !/Chrome/.test(ua) ? "firefox" : /Chrome/.test(ua) ? "chrome" : "other" };
   }
-  if (/Edg\//.test(ua))   return { os: "desktop", browser: "edge" };
-  if (/Chrome/.test(ua))  return { os: "desktop", browser: "chrome" };
-  if (/Safari/.test(ua))  return { os: "desktop", browser: "safari" };
-  if (/Firefox/.test(ua)) return { os: "desktop", browser: "firefox" };
-  return { os: "desktop", browser: "other" };
+  return { os: "desktop", browser: /Edg\//.test(ua) ? "edge" : /Chrome/.test(ua) ? "chrome" : /Safari/.test(ua) ? "safari" : "other" };
 }
 
-function showInstallTip(title, stepsHtml) {
-  const old = document.querySelector(".install-tip-overlay");
+function showTip(title, html) {
+  var old = document.querySelector(".install-tip-overlay");
   if (old) old.remove();
-  const tip = document.createElement("div");
-  tip.className = "install-tip-overlay";
-  tip.style.cssText = "position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);display:flex;align-items:flex-end;justify-content:center;padding:16px;";
-  tip.innerHTML = '<div style="background:rgba(30,30,50,.95);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:28px 24px 24px;width:100%;max-width:360px;text-align:center;color:#fff;">' +
-    '<div style="font-size:44px;margin-bottom:12px;">📱</div>' +
-    '<div style="font-size:17px;font-weight:700;margin-bottom:12px;">' + title + '</div>' +
-    '<div style="color:rgba(255,255,255,.55);font-size:13px;line-height:1.9;text-align:left;">' + stepsHtml + '</div>' +
-    '<button style="margin-top:20px;padding:12px 0;width:100%;border-radius:16px;border:none;background:linear-gradient(135deg,#FF6BA6,#C44569);color:#fff;font-size:15px;font-weight:600;cursor:pointer;" onclick="this.closest(\'.install-tip-overlay\').remove()">我知道了</button>' +
+  var div = document.createElement("div");
+  div.className = "install-tip-overlay";
+  div.style.cssText = "position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.88);display:flex;align-items:flex-end;justify-content:center;padding:16px;";
+  div.innerHTML = '<div style="background:#1e1e32;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:28px 24px 20px;width:100%;max-width:340px;text-align:center;color:#fff;animation:tipUp .3s ease;">' +
+    '<div style="font-size:40px;margin-bottom:10px;">📱</div>' +
+    '<div style="font-size:17px;font-weight:700;margin-bottom:10px;">' + title + '</div>' +
+    '<div style="color:rgba(255,255,255,.5);font-size:13px;line-height:2;text-align:left;">' + html + '</div>' +
+    '<button id="tipCloseBtn" style="margin-top:18px;padding:12px 0;width:100%;border-radius:14px;border:none;background:linear-gradient(135deg,#FF6BA6,#C44569);color:#fff;font-size:15px;font-weight:600;">知道了</button>' +
     '</div>';
-  document.body.appendChild(tip);
-  tip.addEventListener("click", function(e) { if (e.target === tip) tip.remove(); });
+  document.body.appendChild(div);
+  div.addEventListener("click", function(e) { if (e.target === div) div.remove(); });
+  var closeBtn = document.getElementById("tipCloseBtn");
+  if (closeBtn) closeBtn.addEventListener("click", function() { div.remove(); });
 }
 
-function setupInstallBanner() {
+// 为元素安全添加点击事件
+function safeClick(el, fn) {
+  if (el) el.addEventListener("click", fn);
+}
+
+function setupInstallUI() {
   if (installHandled) return;
   installHandled = true;
 
-  const p = detectPlatform();
-  const os = p.os;
-  const browser = p.browser;
+  var p = detectPlatform();
+  var os = p.os;
+  var browser = p.browser;
 
-  if (os === "ios") {
-    installTitle.textContent = "添加到主屏幕";
-    installDesc.textContent = "点击分享 → 添加到主屏幕，像 App 一样打开";
-    installBtn.textContent = "查看教程";
-    installBtn.classList.add("ios-guide");
-    installBtn.addEventListener("click", function() {
-      showInstallTip("添加到主屏幕", "<b>1.</b> 点击底部 <b>分享按钮</b>（⎋）<br><b>2.</b> 找到 <b>「添加到主屏幕」</b><br><b>3.</b> 点击 <b>「添加」</b> 完成");
-    }, { once: true });
-    installBanner.classList.remove("dismissed");
-    return;
-  }
-
-  if (os === "android") {
-    const chromium = ["chrome", "samsung", "edge", "opera", "kiwi", "brave"];
-    if (chromium.indexOf(browser) >= 0) {
-      installTitle.textContent = "安装为独立 App";
-      installDesc.textContent = "一键安装到桌面，像原生应用";
-      installBtn.textContent = "安装";
-      installBtn.classList.remove("ios-guide");
-    } else {
+  // ---- 设定页安装横幅 ----
+  if (installTitle && installBtn) {
+    if (os === "ios") {
       installTitle.textContent = "添加到主屏幕";
-      installDesc.textContent = "在浏览器菜单中可找到添加选项";
+      installDesc.textContent = "点击分享按钮 → 添加到主屏幕";
       installBtn.textContent = "查看教程";
-      installBtn.classList.add("ios-guide");
-      installBtn.addEventListener("click", function() {
-        showInstallTip("添加到主屏幕", "<b>1.</b> 点击浏览器 <b>菜单（⋮）</b><br><b>2.</b> 找到 <b>「添加到主屏幕」</b><br><b>3.</b> 确认后桌面出现图标<br><span style='font-size:11px;opacity:.4'>建议用 Chrome 打开以获得一键安装体验</span>");
-      }, { once: true });
-    }
-    installBanner.classList.remove("dismissed");
-    return;
-  }
-
-  if (os === "desktop") {
-    if (browser === "chrome" || browser === "edge") {
-      installTitle.textContent = "安装为桌面 App";
-      installDesc.textContent = "一键安装，独立窗口打开";
-      installBtn.textContent = "安装";
-      installBtn.classList.remove("ios-guide");
-    } else {
+      installBtn.className = "install-banner-btn ios-guide";
+    } else if (os === "android") {
       installTitle.textContent = "安装到桌面";
-      installDesc.textContent = "推荐用 Chrome / Edge 打开以安装为 App";
-      installBtn.textContent = "查看教程";
-      installBtn.classList.add("ios-guide");
-      installBtn.addEventListener("click", function() {
-        showInstallTip("安装到桌面", "<b>1.</b> 用 <b>Chrome</b> 或 <b>Edge</b> 打开<br><b>2.</b> 地址栏右侧点 ⊕ 安装<br><b>3.</b> 桌面出现独立 App");
-      }, { once: true });
+      installDesc.textContent = "像原生 App 一样打开使用";
+      installBtn.textContent = "安装";
+      installBtn.className = "install-banner-btn";
+    } else {
+      installTitle.textContent = "安装为桌面 App";
+      installDesc.textContent = "独立窗口打开，无浏览器边框";
+      installBtn.textContent = "安装";
+      installBtn.className = "install-banner-btn";
     }
     installBanner.classList.remove("dismissed");
-    return;
   }
 
-  installBanner.classList.add("dismissed");
-}
-
-// 原生安装事件
-window.addEventListener("beforeinstallprompt", function (e) {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBanner.classList.remove("dismissed");
-  installTitle.textContent = "安装为独立 App";
-  installDesc.textContent = "一键安装到桌面";
-  installBtn.textContent = "立即安装";
-  installBtn.classList.remove("ios-guide");
-  if (globalInstallBar) {
-    gibText.textContent = "一键安装到桌面";
-    gibBtn.textContent = "立即安装";
+  // ---- 全局悬浮安装条 ----
+  if (globalInstallBar && gibText && gibBtn) {
+    if (os === "ios") {
+      gibText.textContent = "添加到主屏幕，像 App 一样使用";
+      gibBtn.textContent = "教程";
+    } else {
+      gibText.textContent = "安装到桌面，像原生 App 一样打开";
+      gibBtn.textContent = "安装";
+    }
     globalInstallBar.classList.remove("dismissed");
   }
-});
-
-// 设定页安装按钮
-installBtn.addEventListener("click", async function () {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const result = await deferredPrompt.userChoice;
-    if (result.outcome === "accepted") {
-      installBanner.classList.add("dismissed");
-      if (globalInstallBar) globalInstallBar.classList.add("dismissed");
-    }
-    deferredPrompt = null;
-    return;
-  }
-  showInstallTip("添加到主屏幕", "<b>1.</b> 点击浏览器 <b>菜单/分享按钮</b><br><b>2.</b> 找到 <b>「添加到主屏幕」</b><br><b>3.</b> 确认后桌面出现 idol 图标");
-});
-
-// ---- 全局安装条 ----
-function setupGlobalInstallBar() {
-  if (!globalInstallBar || globalBarDismissed) return;
-  const p = detectPlatform();
-  const os = p.os;
-  const browser = p.browser;
-
-  if (os === "ios") {
-    gibText.textContent = "添加到主屏幕，像 App 一样使用";
-    gibBtn.textContent = "教程";
-  } else if (os === "android") {
-    const chromium = ["chrome", "samsung", "edge", "opera", "kiwi", "brave"];
-    if (chromium.indexOf(browser) >= 0) {
-      gibText.textContent = "安装到桌面，像原生应用一样打开";
-      gibBtn.textContent = "安装";
-    } else {
-      gibText.textContent = "添加到主屏幕";
-      gibBtn.textContent = "教程";
-    }
-  } else {
-    gibText.textContent = "安装到桌面，独立窗口打开";
-    gibBtn.textContent = "教程";
-  }
-  globalInstallBar.classList.remove("dismissed");
 }
 
-gibBtn.addEventListener("click", async function () {
+// 统一安装按钮处理
+function handleInstallClick() {
   if (deferredPrompt) {
     deferredPrompt.prompt();
-    const result = await deferredPrompt.userChoice;
-    if (result.outcome === "accepted") {
-      globalInstallBar.classList.add("dismissed");
-      globalBarDismissed = true;
-    }
-    deferredPrompt = null;
+    deferredPrompt.userChoice.then(function(result) {
+      if (result.outcome === "accepted") {
+        if (installBanner) installBanner.classList.add("dismissed");
+        if (globalInstallBar) globalInstallBar.classList.add("dismissed");
+        globalBarDismissed = true;
+      }
+      deferredPrompt = null;
+    });
     return;
   }
-  const p = detectPlatform();
+  // 兜底：显示手动教程
+  var p = detectPlatform();
   if (p.os === "ios") {
-    showInstallTip("添加到主屏幕", "<b>1.</b> 点击浏览器底部 <b>分享按钮</b>（⎋）<br><b>2.</b> 找到 <b>「添加到主屏幕」</b><br><b>3.</b> 点击 <b>「添加」</b> 完成");
+    showTip("添加到主屏幕",
+      "<b>1.</b> 点击浏览器底部中间的 <b>分享按钮</b> ⎋<br>" +
+      "<b>2.</b> 向下滑动找到 <b>「添加到主屏幕」</b><br>" +
+      "<b>3.</b> 确认名称后点击右上角 <b>「添加」</b><br>" +
+      "<b>4.</b> 回到桌面即可看到 <b>idol</b> 图标 ✨");
   } else if (p.os === "android") {
-    showInstallTip("添加到主屏幕", "<b>1.</b> 点击浏览器 <b>菜单（⋮）</b><br><b>2.</b> 找到 <b>「添加到主屏幕」</b><br><b>3.</b> 确认后桌面出现图标<br><span style='font-size:11px;opacity:.4'>建议用 Chrome 打开以获得一键安装体验</span>");
+    showTip("添加到主屏幕",
+      "<b>1.</b> 点击浏览器右上角 <b>菜单按钮 ⋮</b><br>" +
+      "<b>2.</b> 找到 <b>「添加到主屏幕」</b> 或 <b>「安装应用」</b><br>" +
+      "<b>3.</b> 确认后桌面出现 <b>idol</b> 图标 ✨<br>" +
+      "<span style='font-size:11px;opacity:.35;'>提示：使用 Chrome 浏览器打开可一键安装</span>");
   } else {
-    showInstallTip("安装到桌面", "<b>1.</b> 用 <b>Chrome</b> 或 <b>Edge</b> 打开此页面<br><b>2.</b> 地址栏右侧点 ⊕ 安装<br><b>3.</b> 桌面出现独立 App");
-  }
-});
-
-// =============================================
-// 偶像资料管理（localStorage）
-// =============================================
-const PROFILE_KEY = "idol_profile";
-
-function loadProfile() {
-  try {
-    const raw = localStorage.getItem(PROFILE_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch (_) { return null; }
-}
-
-function saveProfile(data) {
-  localStorage.setItem(PROFILE_KEY, JSON.stringify(data));
-}
-
-// 回填表单
-function fillForm(data) {
-  setStageName.value = data.stageName || "";
-  setRealName.value  = data.realName || "";
-  setAge.value       = data.age || "";
-  setHeight.value    = data.height || "";
-  setDebutYear.value = data.debutYear || "";
-  setGroup.value     = data.group || "";
-  // 身份类型
-  $$("#idolType .opt-chip").forEach((chip) => {
-    chip.classList.toggle("active", chip.dataset.value === (data.idolType || "group"));
-  });
-  // 性格
-  $$("#personality .opt-chip").forEach((chip) => {
-    chip.classList.toggle("active", chip.dataset.value === (data.personality || "energetic"));
-  });
-}
-
-// 读取表单数据
-function readForm() {
-  const idolType = $("#idolType .opt-chip.active")?.dataset?.value || "group";
-  const personality = $("#personality .opt-chip.active")?.dataset?.value || "energetic";
-  return {
-    stageName:   setStageName.value.trim(),
-    realName:    setRealName.value.trim(),
-    age:         parseInt(setAge.value, 10) || 0,
-    height:      parseInt(setHeight.value, 10) || 0,
-    debutYear:   parseInt(setDebutYear.value, 10) || 0,
-    group:       setGroup.value.trim(),
-    idolType,
-    personality,
-  };
-}
-
-// =============================================
-// 设定页逻辑
-// =============================================
-function showSetupScreen(editMode) {
-  setupScreen.classList.remove("hidden");
-  phoneContainer.classList.remove("ready");
-  setupHint.textContent = "";
-
-  if (editMode) {
-    const profile = loadProfile();
-    if (profile) fillForm(profile);
-    setupBtn.textContent = "✦ 保存修改并进入";
-    setupHint.textContent = "正在修改「" + (profile?.stageName || "") + "」的身份设定";
-  } else {
-    setupBtn.textContent = "✦ 进入我的偶像生活";
+    showTip("安装到桌面",
+      "<b>1.</b> 使用 <b>Chrome</b> 或 <b>Edge</b> 浏览器打开此页面<br>" +
+      "<b>2.</b> 地址栏右侧点击 <b>⊕ 安装图标</b><br>" +
+      "<b>3.</b> 桌面出现 <b>idol</b> 独立应用窗口 ✨");
   }
 }
 
-function enterPhone() {
-  const profile = loadProfile();
-  if (!profile) return;
+// 绑定事件（安全检查）
+safeClick(installBtn, handleInstallClick);
+safeClick(gibBtn, handleInstallClick);
 
-  setupScreen.classList.add("hidden");
-  phoneContainer.classList.add("ready");
-  updateGreeting(profile.stageName);
-}
-
-function updateGreeting(name) {
-  if (homeGreeting) homeGreeting.textContent = name || "偶像";
-}
-
-// 表单验证
-function validateForm(data) {
-  if (!data.stageName) return "请输入艺名";
-  if (data.stageName.length < 1 || data.stageName.length > 12) return "艺名长度应为 1-12 个字符";
-  if (!data.age || data.age < 15 || data.age > 35) return "请输入合理的年龄（15-35）";
-  if (!data.debutYear || data.debutYear < 2010 || data.debutYear > 2026) return "请输入合理的出道年份（2010-2026）";
-  if (data.height && (data.height < 145 || data.height > 195)) return "请输入合理的身高（145-195cm）";
-  return null;
-}
-
-// 提交设定
-function submitProfile() {
-  const data = readForm();
-  const error = validateForm(data);
-  if (error) {
-    setupHint.textContent = "⚠ " + error;
-    setupHint.style.color = "#FF6B6B";
-    return;
-  }
-  saveProfile(data);
-  setupHint.style.color = "";
-  enterPhone();
-}
-
-// =============================================
-// 选项芯片点击
-// =============================================
-$$(".option-row").forEach((row) => {
-  row.querySelectorAll(".opt-chip").forEach((chip) => {
-    chip.addEventListener("click", () => {
-      row.querySelectorAll(".opt-chip").forEach((c) => c.classList.remove("active"));
-      chip.classList.add("active");
-    });
-  });
-});
-
-// 设定页提交按钮
-setupBtn.addEventListener("click", submitProfile);
-
-// 回车提交
-[setStageName, setRealName, setAge, setHeight, setDebutYear, setGroup].forEach((el) => {
-  el.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") submitProfile();
-  });
-});
-
-// 首页设置按钮 → 返回修改设定
-homeSettingsBtn.addEventListener("click", () => {
-  showSetupScreen(true);
-});
-
-// =============================================
-// PWA 安装引导（全浏览器）
-// =============================================
-let installHandled = false;
-
-function detectPlatform() {
-  const ua = navigator.userAgent || "";
-  const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  const isAndroid = /Android/.test(ua);
-
-  if (isIOS) {
-    if (/CriOS/.test(ua))  return { os: "ios", browser: "chrome" };
-    if (/FxiOS/.test(ua))  return { os: "ios", browser: "firefox" };
-    if (/EdgiOS/.test(ua)) return { os: "ios", browser: "edge" };
-    if (/OPiOS/.test(ua))  return { os: "ios", browser: "opera" };
-    if (/Safari/.test(ua)) return { os: "ios", browser: "safari" };
-    return { os: "ios", browser: "other" };
-  }
-  if (isAndroid) {
-    if (/SamsungBrowser/.test(ua)) return { os: "android", browser: "samsung" };
-    if (/EdgA\//.test(ua) || /Edg\//.test(ua)) return { os: "android", browser: "edge" };
-    if (/Firefox/.test(ua) && !/Chrome/.test(ua)) return { os: "android", browser: "firefox" };
-    if (/Kiwi/.test(ua))   return { os: "android", browser: "kiwi" };
-    if (/Brave/.test(ua))  return { os: "android", browser: "brave" };
-    if (/UCBrowser/.test(ua)) return { os: "android", browser: "uc" };
-    if (/Chrome/.test(ua)) return { os: "android", browser: "chrome" };
-    return { os: "android", browser: "other" };
-  }
-  // Desktop
-  if (/Edg\//.test(ua))       return { os: "desktop", browser: "edge" };
-  if (/Chrome/.test(ua))      return { os: "desktop", browser: "chrome" };
-  if (/Safari/.test(ua))      return { os: "desktop", browser: "safari" };
-  if (/Firefox/.test(ua))     return { os: "desktop", browser: "firefox" };
-  return { os: "desktop", browser: "other" };
-}
-
-function setupInstallBanner() {
-  const platform = detectPlatform();
-
-  if (platform === "ios-safari") {
-    installTitle.textContent = "添加到主屏幕";
-    installDesc.textContent = "点击分享 → 添加到主屏幕，像 App 一样打开";
-    installBtn.textContent = "查看教程";
-    installBtn.classList.add("ios-guide");
-    installBtn.addEventListener("click", () => {
-      const tip = document.createElement("div");
-      tip.style.cssText = "position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(0,0,0,.92);color:#fff;padding:24px;text-align:center;font-size:15px;line-height:1.8;border-radius:20px 20px 0 0;";
-      tip.innerHTML = '<div style="font-size:40px;margin-bottom:12px;">📱</div>' +
-        '<div style="font-weight:600;margin-bottom:8px;">添加到主屏幕</div>' +
-        '<div style="color:rgba(255,255,255,.6);font-size:13px;">点击 Safari 底部的 <b>分享按钮</b><br>然后选择 <b>「添加到主屏幕」</b><br>最后点击 <b>「添加」</b> 即可</div>' +
-        '<button style="margin-top:16px;padding:10px 40px;border-radius:20px;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:14px;cursor:pointer;" onclick="this.parentElement.remove()">我知道了</button>';
-      document.body.appendChild(tip);
-    });
-    installBanner.classList.remove("dismissed");
-  } else if (platform === "android-chrome" || platform === "desktop") {
-    installTitle.textContent = "安装为独立 App";
-    installDesc.textContent = "无浏览器边框，桌面直接打开";
-    installBtn.textContent = "安装";
-    installBanner.classList.remove("dismissed");
-  } else {
-    installBanner.classList.add("dismissed");
-  }
-}
-
-// 捕获 Chrome/Edge 原生安装事件
-window.addEventListener("beforeinstallprompt", function (e) {
+// 原生 PWA 安装事件
+window.addEventListener("beforeinstallprompt", function(e) {
   e.preventDefault();
   deferredPrompt = e;
-  installBanner.classList.remove("dismissed");
-  installTitle.textContent = "安装为独立 App";
-  installDesc.textContent = "一键安装到桌面，像原生应用一样打开";
-  installBtn.textContent = "立即安装";
-  installBtn.classList.remove("ios-guide");
-});
-
-installBtn.addEventListener("click", async function () {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    var result = await deferredPrompt.userChoice;
-    if (result.outcome === "accepted") {
-      installBanner.classList.add("dismissed");
-    }
-    deferredPrompt = null;
+  if (installTitle && installBtn) {
+    installTitle.textContent = "安装为独立 App";
+    installDesc.textContent = "一键安装到桌面";
+    installBtn.textContent = "立即安装";
+    installBtn.className = "install-banner-btn";
+    installBanner.classList.remove("dismissed");
+  }
+  if (gibText && gibBtn) {
+    gibText.textContent = "一键安装到桌面";
+    gibBtn.textContent = "立即安装";
+    if (globalInstallBar) globalInstallBar.classList.remove("dismissed");
   }
 });
 
@@ -1305,8 +1037,7 @@ installBtn.addEventListener("click", async function () {
   document.head.appendChild(style);
 
   // 安装引导
-  setupInstallBanner();
-  setupGlobalInstallBar();
+  setupInstallUI();
 
   // 检查是否有已保存的偶像资料
   var profile = loadProfile();
