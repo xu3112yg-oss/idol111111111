@@ -257,26 +257,24 @@ body {
 /* ---- 全局安装引导条 ---- */
 .global-install-bar {
   position: fixed;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  z-index: 250;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 16px;
-  background: rgba(20,20,45,.92);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 16px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  padding: 14px 16px;
+  padding-bottom: calc(14px + env(safe-area-inset-bottom, 8px));
+  background: #14142d;
+  border-top: 1px solid rgba(255,255,255,.15);
+  box-shadow: 0 -4px 20px rgba(0,0,0,.5);
   transition: opacity .3s, transform .3s;
 }
 .global-install-bar.dismissed {
   opacity: 0;
   pointer-events: none;
-  transform: translateY(20px);
+  transform: translateY(100%);
 }
 .gib-icon { font-size: 28px; flex-shrink: 0; }
 .gib-text { flex: 1; font-size: 13px; font-weight: 500; color: rgba(255,255,255,.85); min-width: 0; }
