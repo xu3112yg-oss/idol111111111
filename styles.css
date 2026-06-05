@@ -10,12 +10,13 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: #1a1a2e;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  min-height: 100dvh;
   -webkit-tap-highlight-color: transparent;
   user-select: none; -webkit-user-select: none;
 }
@@ -27,9 +28,9 @@ body {
   z-index: 100;
   background: radial-gradient(ellipse at 50% 0%, #1e1b4b 0%, #0f0f1a 60%, #000 100%);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  align-items: safe center;
+  justify-content: safe center;
+  padding: 16px;
   transition: opacity .5s ease, transform .5s ease;
 }
 .setup-screen.hidden {
@@ -42,18 +43,21 @@ body {
   width: 100%;
   max-width: 360px;
   max-height: 90vh;
+  max-height: 90dvh;
   overflow-y: auto;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.06);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: 28px;
   padding: 32px 24px 28px;
   box-shadow: 0 25px 60px rgba(0,0,0,.5);
   -webkit-overflow-scrolling: touch;
+  margin: 0 auto;
 }
 
 .setup-header {
   text-align: center;
   margin-bottom: 24px;
+  width: 100%;
 }
 
 /* App 图标 */
@@ -129,6 +133,36 @@ body {
   background: rgba(255,255,255,.06);
 }
 .form-input::placeholder { color: rgba(255,255,255,.18); }
+
+/* 折叠区 */
+.setup-section {
+  margin-top: 4px;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.setup-section-title {
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,.55);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background .15s;
+}
+.setup-section-title:hover { background: rgba(255,255,255,.03); }
+.toggle-arrow { font-size: 18px; transition: transform .25s; }
+.setup-section.open .toggle-arrow { transform: rotate(90deg); }
+.setup-section-body {
+  display: none;
+  padding: 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.setup-section:not(.open) .setup-section-body { display: none; }
 
 /* 选项芯片 */
 .option-row {
@@ -513,6 +547,14 @@ body {
   flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
   font-size: 18px; font-weight: 700; color: #fff;
+  overflow: hidden;
+}
+.chatlist-avatar-portrait {
+  border-radius: 8px;
+  background: transparent !important;
+}
+.chatlist-avatar-portrait svg {
+  width: 100%; height: 100%; display: block;
 }
 .chatlist-info { flex: 1; min-width: 0; }
 .chatlist-name { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
@@ -546,6 +588,14 @@ body {
   flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
   font-size: 16px; font-weight: 700; color: #fff;
+  overflow: hidden;
+}
+.feed-avatar-portrait {
+  border-radius: 7px;
+  background: transparent !important;
+}
+.feed-avatar-portrait svg {
+  width: 100%; height: 100%; display: block;
 }
 .feed-user { font-size: 14px; font-weight: 600; }
 .feed-time { font-size: 11px; opacity: .4; margin-top: 2px; }
@@ -568,6 +618,105 @@ body {
   display: flex; gap: 20px;
   padding: 4px 16px 14px;
   font-size: 12px; opacity: .5;
+}
+
+/* 评论区 */
+.feed-comments {
+  padding: 0 16px 12px;
+  border-top: 1px solid rgba(255,255,255,.04);
+  margin: 0 12px;
+}
+.feed-comments.hidden { display: none; }
+
+.comment-item {
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(255,255,255,.02);
+}
+.comment-reply {
+  padding-left: 16px;
+  opacity: .8;
+}
+.comment-negative {
+  opacity: .45;
+}
+.comment-user {
+  font-weight: 600;
+  color: rgba(255,255,255,.5);
+  margin-right: 6px;
+}
+.comment-text { color: rgba(255,255,255,.75); }
+.comment-likes {
+  font-size: 10px;
+  opacity: .4;
+  margin-left: 8px;
+  cursor: default;
+}
+.comment-more {
+  padding: 8px 0 4px;
+  font-size: 11px;
+  color: rgba(255,255,255,.25);
+  cursor: pointer;
+}
+
+/* 私密平台好友互动 */
+.friend-likes {
+  padding: 4px 0;
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
+}
+.friend-comments {
+  padding: 4px 0;
+  margin-top: 2px;
+  border-top: 1px solid rgba(255,255,255,.04);
+}
+.fc-item {
+  font-size: 12px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.65);
+}
+.fc-item b {
+  color: rgba(255,255,255,.5);
+  font-weight: 600;
+  margin-right: 2px;
+}
+
+/* WeChat 朋友圈风格调整 */
+.app-view.theme-wechat .feed-item {
+  padding: 0 0 8px 0;
+}
+.app-view.theme-wechat .feed-user {
+  color: #4876FF;
+}
+.app-view.theme-wechat .friend-likes {
+  color: rgba(255,255,255,.35);
+}
+.app-view.theme-wechat .fc-item b {
+  color: #4876FF;
+}
+
+/* KakaoTalk 动态风格调整 */
+.app-view.theme-kakaotalk .feed-item {
+  background: #fff;
+  margin: 0 0 8px 0;
+  border-radius: 12px;
+  border-bottom: none;
+}
+.app-view.theme-kakaotalk .friend-likes {
+  color: #666;
+}
+.app-view.theme-kakaotalk .fc-item {
+  color: #333;
+}
+.app-view.theme-kakaotalk .fc-item b {
+  color: #555;
+}
+.app-view.theme-kakaotalk .feed-user {
+  color: #191919;
+}
+.app-view.theme-kakaotalk .feed-body {
+  color: #333;
 }
 
 /* ---- 对话页 ---- */
@@ -822,6 +971,122 @@ body {
 .app-view.theme-bubble .tab-item { color: #777; }
 .app-view.theme-bubble .tab-item.active { color: #FF6BA6; }
 .app-view.theme-bubble .chatlist-avatar { background: linear-gradient(135deg, #FF6BA6, #C44569); }
+
+/* ===== 发布按钮（FAB） ===== */
+.fab-post {
+  position: absolute;
+  bottom: 20px;
+  right: 16px;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #FF6BA6, #C44569);
+  color: #fff;
+  font-size: 28px;
+  font-weight: 300;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(196,69,105,.4);
+  z-index: 10;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .15s, box-shadow .15s;
+}
+.fab-post:active { transform: scale(.9); }
+
+/* 各平台 FAB 颜色 */
+.app-view.theme-kakaotalk .fab-post { background: #FEE500; color: #191919; box-shadow: 0 6px 24px rgba(254,229,0,.4); }
+.app-view.theme-instagram .fab-post { background: linear-gradient(135deg, #dc2743, #cc2366); }
+.app-view.theme-wechat .fab-post { background: #2BBF6A; }
+.app-view.theme-twitter .fab-post { background: #1d9bf0; }
+.app-view.theme-bubble .fab-post { background: linear-gradient(135deg, #FF6BA6, #C44569); }
+
+/* ===== 发布弹窗 ===== */
+.compose-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(0,0,0,.7);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transition: opacity .25s ease;
+}
+.compose-overlay.hidden { opacity: 0; pointer-events: none; }
+
+.compose-sheet {
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  background: #1a1a2e;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+  animation: sheetUp .3s ease;
+  overflow: hidden;
+}
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+.compose-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.compose-cancel {
+  background: none; border: none; color: rgba(255,255,255,.6);
+  font-size: 15px; cursor: pointer; padding: 4px 8px;
+}
+.compose-title { font-size: 16px; font-weight: 600; color: #fff; }
+.compose-submit {
+  background: linear-gradient(135deg, #FF6BA6, #C44569);
+  border: none; border-radius: 18px; padding: 7px 18px;
+  color: #fff; font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: opacity .15s;
+}
+.compose-submit:disabled { opacity: .35; cursor: not-allowed; }
+
+.compose-text {
+  width: 100%;
+  min-height: 120px;
+  padding: 16px;
+  border: none; background: transparent;
+  color: #fff; font-size: 15px; line-height: 1.6;
+  resize: vertical; outline: none; font-family: inherit;
+}
+.compose-text::placeholder { color: rgba(255,255,255,.25); }
+
+.compose-image-area { padding: 0 16px 12px; }
+.compose-add-img {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px; border-radius: 14px;
+  border: 1px dashed rgba(255,255,255,.2);
+  cursor: pointer; color: rgba(255,255,255,.4);
+  font-size: 14px; transition: border-color .15s;
+}
+.compose-add-img:hover { border-color: rgba(255,255,255,.4); }
+.add-img-icon { font-size: 20px; }
+
+.compose-preview {
+  position: relative;
+  margin: 0 16px 12px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.compose-preview img {
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  display: block;
+  border-radius: 14px;
+}
+.compose-remove-img {
+  position: absolute;
+  top: 8px; right: 8px;
+  width: 28px; height: 28px; border-radius: 50%;
+  border: none; background: rgba(0,0,0,.7);
+  color: #fff; font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
 
 /* =============================================
    响应式
