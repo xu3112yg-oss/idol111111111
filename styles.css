@@ -254,6 +254,47 @@ body {
   font-weight: 500;
 }
 
+/* ---- 全局安装引导条 ---- */
+.global-install-bar {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(20,20,45,.92);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  transition: opacity .3s, transform .3s;
+}
+.global-install-bar.dismissed {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+.gib-icon { font-size: 28px; flex-shrink: 0; }
+.gib-text { flex: 1; font-size: 13px; font-weight: 500; color: rgba(255,255,255,.85); min-width: 0; }
+.gib-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(135deg, #FF6BA6, #C44569);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(196,69,105,.3);
+  min-width: 0;
+}
+.gib-btn:active { transform: scale(.95); }
+
 /* ---- 首页顶部行 ---- */
 .home-top-row {
   display: flex;
