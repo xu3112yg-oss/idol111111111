@@ -2210,6 +2210,330 @@ function sendMessage() {
 
 
 // =============================================
+// =============================================
+// 发布动态功能
+// =============================================
+let composeImageData = null;
+
+function getUserPostsKey() {
+  return "user_posts_" + currentApp;
+}
+
+function loadUserPosts() {
+  try {
+    return JSON.parse(localStorage.getItem(getUserPostsKey()) || "[]");
+  } catch (e) { return []; }
+}
+
+function saveUserPosts(posts) {
+  localStorage.setItem(getUserPostsKey(), JSON.stringify(posts));
+}
+
+function openComposer() {
+  composeOverlay.classList.remove("hidden");
+  composeText.value = "";
+  composeImageData = null;
+  composePreview.classList.add("hidden");
+  composeImageArea.classList.remove("hidden");
+  composeImgInput.value = "";
+  composeSubmit.disabled = true;
+  composeText.focus();
+}
+
+function closeComposer() {
+  composeOverlay.classList.add("hidden");
+}
+
+composeText.addEventListener("input", function() {
+  composeSubmit.disabled = !composeText.value.trim() && !composeImageData;
+});
+
+composeImgInput.addEventListener("change", function(e) {
+  var file = e.target.files && e.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    composeImageData = ev.target.result;
+    composePreviewImg.src = composeImageData;
+    composePreview.classList.remove("hidden");
+    composeImageArea.classList.add("hidden");
+    composeSubmit.disabled = false;
+  };
+  reader.readAsDataURL(file);
+});
+
+composeRemoveImg.addEventListener("click", function() {
+  composeImageData = null;
+  composePreview.classList.add("hidden");
+  composeImageArea.classList.remove("hidden");
+  composeImgInput.value = "";
+  composeSubmit.disabled = !composeText.value.trim();
+});
+
+composeCancel.addEventListener("click", closeComposer);
+composeOverlay.addEventListener("click", function(e) {
+  if (e.target === composeOverlay) closeComposer();
+});
+
+fabPost.addEventListener("click", openComposer);
+
+composeSubmit.addEventListener("click", function() {
+  var text = composeText.value.trim();
+  if (!text && !composeImageData) return;
+  var post = {
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    text: text,
+    image: composeImageData || null,
+    time: "刚刚",
+    timestamp: Date.now(),
+    likes: 0,
+    liked: false,
+    comments: []
+  };
+  var posts = loadUserPosts();
+  posts.unshift(post);
+  saveUserPosts(posts);
+  closeComposer();
+  if (currentScreen === "feed") refreshFeed();
+});
+
+// =============================================
+// 公开平台评论系统
+// =============================================
+function isPublicPlatform() {
+  return currentApp === "twitter" || currentApp === "instagram" || currentApp === "bubble";
+}
+
+function getCommentCount() { return 100 + Math.floor(Math.random() * 101); }
+
+var fanNamesByLang = {
+  en: ["Emily.M","sarah_rose","@alex_stan","Jessica K","mike_onthebeat","Hannah L","@ryan_vibes","Olivia Park","daniel_kim","Sophia M","@noah_listens","Ava Johnson","@ethan_music","Isabella R","Liam N","@chloe_world","Lucas T","Mia S","@jake_fan","Emma W"],
+  ko: ["지은","수빈","@민수야","하은맘","서준","@예진_데일리","도윤","지아파파","@현우의하루","수아","시윤","@채원_","건우","나은","@준호팬","유진","다은맘","@승현이다","하린","지호"],
+  jp: ["@yuki_music","はると","あかり","@sakura_pop","りくママ","みお","@taro_idol","ゆな","@kento_fan","りの","あおい","@mei_0412","そうた","ひなた","@rena_daily","つばさ","@まさき","すず","かな","@りょうへい"],
+  zh: ["小雨天","@小陈爱追星","阿琳呀","大壮哥","@甜甜的柚子","木木三","@老王的日常","小何同学","@阿杰很忙","菲菲","@小马过河","静静","@阿泽","乔乔不吃糖","@橘子汽水","一帆","@大力出奇迹","小鹿斑比","@春娇","志明"],
+  es: ["María G","@carlos_kpop","Valentina R","Juan P","@sofi_latina","Diego M","Camila S","@andres_music","Luciana F","@mateo_idol","Isabella T","Santiago L","@valeria_dance","Emilio R","@paula_stan"],
+  th: ["@ฝนตก","น้ำหวาน","@ต้นกล้า","@มะลิ","ตะวัน","@ใบเตย","ปลาทอง","@เต่าบิน","@แตงโม","สมชาย","@นกฮูก","@กุหลาบ","มานะ","@ตะวันฉาย","@สายรุ้ง"],
+};
+
+var positiveComments = {
+  en: ["You're literally glowing! ✨","Best artist of this generation fr","I can't stop watching this","This made my whole day 💜","Iconic behavior honestly","No one is doing it like you","Stanning you was the best decision","Pure talent, no debate","My queen/king 👑","Literally crying tears of joy rn 😭"],
+  ko: ["진짜 미쳤다... 너무 예뻐요 ㅠㅠ","역시 최고예요! 💕","오늘도 반합니다...","이게 진정한 실력이지","팬이길 잘했다고 느끼는 순간","언니 완전 천재 아니에요?","심장이 아파요 너무 좋아서","매일매일 레전드 갱신 중"],
+  jp: ["本当に美しいです ✨","最高のアーティスト！","毎日癒されています 💕","天才すぎます...","ずっと応援します！","感動で涙が止まらない","完璧なパフォーマンス","日本から愛を込めて 🇯🇵"],
+  zh: ["绝了，这就是实力 ✨","今天也被圈粉了","为什么这么好看我不理解","一天不看浑身难受","路人转粉只需要一张照片","我不允许有人没看过这个","这谁顶得住啊","天选之女/子"],
+  es: ["Eres increíble! 💕","La mejor del mundo","Te amo con todo mi corazón","Nadie como tú, reina","Brasil te ama 🇧🇷","Colombia está contigo","México te apoya siempre","Qué talento, por Dios"],
+  th: ["ดีที่สุดในโลกเลย 💕","รักมากๆ ค่ะ","สวยมากกกก","เก่งที่สุดในสามโลก","คิดถึงจังเลย","วันนี้ก็สวยเหมือนเดิม","เป็นกำลังใจให้นะคะ","รอยยิ้มมีค่ามาก"],
+};
+
+var neutralComments = {
+  en: ["Not bad","Is this new?","When is the next album coming?","I prefer the old style tbh","Interesting...","What song is this?","Can someone translate?","Just passing by","Who is this?","Reminds me of someone else"],
+  ko: ["오...","이번 컨셉은 뭐지?","솔직히 저번 게 더 좋았어요","신곡 언제 나와요?","음... 그냥 그래요","무대는 좋은데 노래가 아쉽","표정이 좀 어색한 것 같아요","그냥 지나가다가"],
+  jp: ["うーん...普通かな","前の方が好きだった","新曲まだですか？","誰か翻訳して","悪くはないけど...","期待してたのと違う","ちょっと微妙","通りすがりです"],
+  zh: ["还行吧","感觉不如上次","有没有人觉得一般","新歌什么时候出","纯路人，这是谁","说实话有点失望","造型不太行","就那样吧"],
+};
+
+var negativeComments = {
+  en: ["Overrated af 🙄","This is so boring","Try harder next time","Not impressed at all","Stop trying so hard","Generic and forgettable","I've seen better from nugu groups","Lip sync is obvious"],
+  ko: ["별로다...","이게 왜 난리야","솔직히 못하네요","실력이 늘긴 하나요?","표정이 너무 과해요","과대평가됐네","립싱크 티나요","예전이 더 나았어요"],
+  jp: ["期待外れ...","下手になったね","リップシンクばればれ","つまらない","こんなの誰が聞くの","お金の無駄","ファンがかわいそう","全然ダメ"],
+  zh: ["这也太一般了","过誉了吧","粉丝滤镜太厚","说实话挺难听的","这也能吹上天","不知道在火什么","泯然众人矣","巅峰期过了吧"],
+};
+
+var replyToFanComments = {
+  en: ["Emily.M totally agree!","sarah_rose same here 💕","Jessica K fr fr","@alex_stan you said it","Right? mike_onthebeat gets it","Hannah L exactly my thoughts","This 100% Olivia Park","Couldn't agree more @ryan_vibes"],
+  ko: ["지은님 인정이요","수빈님 저도요!","@민수야 공감합니다","맞아요 하은맘님","@예진_데일리 진짜 그렇죠","서준님 인정 인정"],
+  jp: ["@yuki_music 同感です！","はるとさん そうですよね","あかりさん わかります"],
+  zh: ["小雨天 说得对","@小陈爱追星 +1","阿琳呀 附议","木木三 赞同"],
+};
+
+function randomFrom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+function generateComments(count) {
+  var comments = [];
+  var langs = isPublicPlatform() ? ["en","ko","jp","zh","es","th"] : ["zh"];
+  var weights;
+  if (currentApp === "twitter") weights = { en: 35, ko: 20, jp: 10, zh: 10, es: 10, th: 5 };
+  else if (currentApp === "instagram") weights = { en: 30, ko: 15, jp: 10, zh: 8, es: 15, th: 7 };
+  else if (currentApp === "bubble") weights = { ko: 50, en: 15, jp: 15, zh: 15, es: 3, th: 2 };
+  else weights = { zh: 100 };
+  var totalW = 0; for (var l in weights) totalW += weights[l];
+
+  for (var i = 0; i < count; i++) {
+    var r = Math.random() * totalW;
+    var lang = "en";
+    for (var l in weights) { r -= weights[l]; if (r <= 0) { lang = l; break; } }
+    var toneRand = Math.random();
+    var tone, pool;
+    if (toneRand < 0.5) { tone = "positive"; pool = positiveComments; }
+    else if (toneRand < 0.7) { tone = "neutral"; pool = neutralComments; }
+    else if (toneRand < 0.85) { tone = "negative"; pool = negativeComments; }
+    else { tone = "reply"; pool = replyToFanComments; }
+    var texts = pool[lang] || pool["en"];
+    var names = fanNamesByLang[lang] || fanNamesByLang["en"];
+    var text = randomFrom(texts);
+    if (tone === "reply") text = randomFrom(replyToFanComments[lang] || replyToFanComments["en"]);
+    var comment = {
+      id: "c" + i,
+      user: randomFrom(names),
+      text: text,
+      tone: tone,
+      likes: tone === "positive" ? Math.floor(Math.random() * 45) + 3 : tone === "negative" ? Math.floor(Math.random() * 8) : Math.floor(Math.random() * 15),
+      lang: lang,
+    };
+    if (Math.random() < 0.15 && comments.length > 0) {
+      var parent = comments[Math.floor(Math.random() * comments.length)];
+      if (!parent.replies) parent.replies = [];
+      parent.replies.push({
+        id: comment.id + "r",
+        user: randomFrom(names),
+        text: tone === "reply" ? randomFrom(replyToFanComments[lang] || replyToFanComments["en"]) : randomFrom(neutralComments[lang] || neutralComments["en"]),
+        likes: Math.floor(Math.random() * 8),
+      });
+    } else {
+      comments.push(comment);
+    }
+  }
+  return comments;
+}
+
+function renderComments(comments) {
+  if (!comments || comments.length === 0) return "";
+  var display = comments.slice(0, 30);
+  var html = '<div class="feed-comments">';
+  display.forEach(function(c) {
+    html += '<div class="comment-item ' + (c.tone === "negative" ? "comment-negative" : "") + '">' +
+      '<span class="comment-user">' + c.user + '</span>' +
+      '<span class="comment-text">' + c.text + '</span>' +
+      '<span class="comment-likes">♡ ' + c.likes + '</span>' +
+    '</div>';
+    if (c.replies) {
+      c.replies.forEach(function(r) {
+        html += '<div class="comment-item comment-reply">' +
+          '<span class="comment-user">' + r.user + '</span>' +
+          '<span class="comment-text">' + r.text + '</span>' +
+          '<span class="comment-likes">♡ ' + r.likes + '</span>' +
+        '</div>';
+      });
+    }
+  });
+  if (comments.length > 30) html += '<div class="comment-more">查看全部 ' + comments.length + ' 条评论...</div>';
+  html += '</div>';
+  return html;
+}
+
+var commentCache = {};
+
+// =============================================
+// 动态渲染系统
+// =============================================
+function renderFriendInteractions(item) {
+  var html = '';
+  var names = item.friendLikes || [];
+  var comments = item.friendComments || [];
+  if (names.length > 0) {
+    var likeStr = names.slice(0, 5).join(', ');
+    if (names.length > 5) likeStr += ' 等' + names.length + '人';
+    html += '<div class="friend-likes">❤️ ' + likeStr + '</div>';
+  }
+  if (comments.length > 0) {
+    html += '<div class="friend-comments">';
+    comments.forEach(function(c) {
+      html += '<div class="fc-item"><b>' + c.user + '</b>：' + c.text + '</div>';
+    });
+    html += '</div>';
+  }
+  return html;
+}
+
+function refreshFeed() {
+  var data = getAppData(currentApp);
+  var mockItems = data.feedItems;
+  applyDynamicTimes(mockItems);
+  var userPosts = loadUserPosts();
+  var isPublic = isPublicPlatform();
+  var allItems = [];
+
+  userPosts.forEach(function(p) {
+    if (isPublic && !commentCache[p.id]) commentCache[p.id] = generateComments(getCommentCount());
+    var comments = isPublic ? (commentCache[p.id] || []) : [];
+    allItems.push({ type: "user", html: renderUserPost(p, comments), id: p.id, post: p });
+  });
+
+  mockItems.forEach(function(item, i) {
+    var mockId = "mock_" + i;
+    if (isPublic && !commentCache[mockId]) commentCache[mockId] = generateComments(getCommentCount());
+    var comments = isPublic ? (commentCache[mockId] || []) : [];
+    allItems.push({ type: "mock", html: renderFeedItemHtml(item, comments), id: mockId });
+  });
+
+  feedItems.innerHTML = allItems.map(function(a) { return a.html; }).join("");
+
+  feedItems.querySelectorAll(".feed-like-btn").forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      var postEl = btn.closest(".user-post");
+      if (!postEl) return;
+      var postId = postEl.dataset.postId;
+      var posts = loadUserPosts();
+      var post = posts.find(function(p) { return p.id === postId; });
+      if (!post) return;
+      post.liked = !post.liked;
+      post.likes += post.liked ? 1 : -1;
+      if (post.likes < 0) post.likes = 0;
+      saveUserPosts(posts);
+      btn.textContent = (post.liked ? "♥ " : "♡ ") + post.likes;
+    });
+  });
+
+  feedItems.querySelectorAll(".comment-toggle").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      var commentsEl = btn.nextElementSibling;
+      var isShowing = !commentsEl.classList.contains("hidden");
+      if (isShowing) { commentsEl.classList.add("hidden"); btn.textContent = "💬 查看评论"; }
+      else { commentsEl.classList.remove("hidden"); btn.textContent = "💬 收起评论"; }
+    });
+  });
+}
+
+function renderUserPost(post, comments) {
+  var isPublic = isPublicPlatform();
+  var imgHtml = post.image
+    ? '<div class="feed-image" style="height:auto;background:transparent;"><img src="' + post.image + '" style="width:100%;max-height:260px;object-fit:cover;border-radius:12px;" /></div>'
+    : "";
+  var elapsed = post.timestamp ? Math.floor((Date.now() - post.timestamp) / 1000 / 60) : 0;
+  var timeStr = post.time || (elapsed < 1 ? "刚刚" : elapsed < 60 ? elapsed + "分钟前" : elapsed < 1440 ? Math.floor(elapsed / 60) + "小时前" : Math.floor(elapsed / 1440) + "天前");
+  var actionsHtml = isPublic
+    ? '<span class="feed-like-btn">' + (post.liked ? "♥ " : "♡ ") + (post.likes || 0) + '</span><span class="comment-toggle" style="cursor:pointer;">💬 查看评论</span>'
+    : '';
+  return '<div class="feed-item user-post" data-post-id="' + post.id + '">' +
+    '<div class="feed-header">' + feedAvatarHtml("linear-gradient(135deg,#FF6BA6,#C44569)", "我") +
+    '<div><div class="feed-user">我</div><div class="feed-time">' + timeStr + '</div></div></div>' +
+    (post.text ? '<div class="feed-body">' + post.text + '</div>' : '') + imgHtml +
+    (actionsHtml ? '<div class="feed-actions">' + actionsHtml + '</div>' : '') +
+    (isPublic ? '<div class="feed-comments hidden">' + renderComments(comments) + '</div>' : '') +
+  '</div>';
+}
+
+function renderFeedItemHtml(item, comments) {
+  var isPublic = isPublicPlatform();
+  var actionsHtml;
+  if (isPublic) {
+    actionsHtml = '<div class="feed-actions"><span>♡ ' + (item.likes || 0) + '</span>' + (item.rt ? '<span>↺ ' + item.rt + '</span>' : '') + '<span class="comment-toggle" style="cursor:pointer;">💬 查看评论</span></div>';
+  } else {
+    actionsHtml = renderFriendInteractions(item);
+    if (!actionsHtml && item.likes) actionsHtml = '<div class="feed-actions"><span>♡ ' + item.likes + '</span></div>';
+  }
+  return '<div class="feed-item">' +
+    '<div class="feed-header">' + feedAvatarHtml(item.color, item.letter, item.role) +
+    '<div><div class="feed-user">' + item.user + '</div><div class="feed-time">' + item.time + '</div></div></div>' +
+    (item.img ? '<div class="feed-image">' + item.img + '</div>' : '') +
+    '<div class="feed-body"><span class="feed-text-orig">' + item.body + '</span>' +
+    (item.tr && item.tr !== item.body ? '<button class="msg-translate-btn" onclick="var t=this.nextElementSibling;t.classList.toggle(\'show\');this.textContent=t.classList.contains(\'show\')?\'收起\':\'译\'">译</button><div class="msg-translation">' + item.tr + '</div>' : '') +
+    '</div>' + actionsHtml +
+    (isPublic ? '<div class="feed-comments hidden">' + renderComments(comments) + '</div>' : '') +
+  '</div>';
+}
+
+
 // 本地智能回复引擎
 // =============================================
 var convMemory = {}; // 记录每个对话的最近回复 + 上下文轮次
@@ -2394,6 +2718,120 @@ function smartReply(userText, appId) {
 
   return reply;
 }
+
+// =============================================
+// PWA 安装系统
+// =============================================
+var deferredPrompt = null;
+var globalBarDismissed = false;
+var installHandled = false;
+
+function detectPlatform() {
+  var ua = navigator.userAgent || "";
+  if (/iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) {
+    return { os: "ios", browser: /CriOS/.test(ua) ? "chrome" : /FxiOS/.test(ua) ? "firefox" : /EdgiOS/.test(ua) ? "edge" : "safari" };
+  }
+  if (/Android/.test(ua)) {
+    return { os: "android", browser: /SamsungBrowser/.test(ua) ? "samsung" : /Firefox/.test(ua) && !/Chrome/.test(ua) ? "firefox" : /Chrome/.test(ua) ? "chrome" : "other" };
+  }
+  return { os: "desktop", browser: /Edg\//.test(ua) ? "edge" : /Chrome/.test(ua) ? "chrome" : /Safari/.test(ua) ? "safari" : "other" };
+}
+
+function showTip(title, html) {
+  var old = document.querySelector(".install-tip-overlay");
+  if (old) old.remove();
+  var div = document.createElement("div");
+  div.className = "install-tip-overlay";
+  div.style.cssText = "position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.88);display:flex;align-items:flex-end;justify-content:center;padding:16px;";
+  div.innerHTML = '<div style="background:#1e1e32;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:28px 24px 20px;width:100%;max-width:340px;text-align:center;color:#fff;animation:tipUp .3s ease;">' +
+    '<div style="font-size:40px;margin-bottom:10px;">📱</div>' +
+    '<div style="font-size:17px;font-weight:700;margin-bottom:10px;">' + title + '</div>' +
+    '<div style="color:rgba(255,255,255,.5);font-size:13px;line-height:2;text-align:left;">' + html + '</div>' +
+    '<button id="tipCloseBtn" style="margin-top:18px;padding:12px 0;width:100%;border-radius:14px;border:none;background:linear-gradient(135deg,#FF6BA6,#C44569);color:#fff;font-size:15px;font-weight:600;">知道了</button>' +
+    '</div>';
+  document.body.appendChild(div);
+  div.addEventListener("click", function(e) { if (e.target === div) div.remove(); });
+  var closeBtn = document.getElementById("tipCloseBtn");
+  if (closeBtn) closeBtn.addEventListener("click", function() { div.remove(); });
+}
+
+function safeClick(el, fn) {
+  if (el) el.addEventListener("click", fn);
+}
+
+function setupInstallUI() {
+  if (installHandled) return;
+  installHandled = true;
+  var p = detectPlatform();
+  var os = p.os;
+  if (globalInstallBar && gibText && gibBtn) {
+    if (os === "ios") { gibText.textContent = "添加到主屏幕，像 App 一样使用"; gibBtn.textContent = "教程"; }
+    else { gibText.textContent = "安装到桌面，像原生 App 一样打开"; gibBtn.textContent = "安装"; }
+    globalInstallBar.classList.remove("dismissed");
+  }
+}
+
+function handleInstallClick() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function(result) {
+      if (result.outcome === "accepted") { if (globalInstallBar) globalInstallBar.classList.add("dismissed"); globalBarDismissed = true; }
+      deferredPrompt = null;
+    });
+    return;
+  }
+  var p = detectPlatform();
+  if (p.os === "ios") {
+    showTip("添加到主屏幕", "<b>1.</b> 点击浏览器底部中间的 <b>分享按钮</b> ⎋<br><b>2.</b> 向下滑动找到 <b>「添加到主屏幕」</b><br><b>3.</b> 确认名称后点击右上角 <b>「添加」</b><br><b>4.</b> 回到桌面即可看到 <b>idol</b> 图标 ✨");
+  } else if (p.os === "android") {
+    showTip("添加到主屏幕", "<b>1.</b> 点击浏览器右上角 <b>菜单按钮 ⋮</b><br><b>2.</b> 找到 <b>「添加到主屏幕」</b> 或 <b>「安装应用」</b><br><b>3.</b> 确认后桌面出现 <b>idol</b> 图标 ✨<br><span style='font-size:11px;opacity:.35;'>提示：使用 Chrome 浏览器打开可一键安装</span>");
+  } else {
+    showTip("安装到桌面", "<b>1.</b> 使用 <b>Chrome</b> 或 <b>Edge</b> 浏览器打开此页面<br><b>2.</b> 地址栏右侧点击 <b>⊕ 安装图标</b><br><b>3.</b> 桌面出现 <b>idol</b> 独立应用窗口 ✨");
+  }
+}
+
+safeClick(gibBtn, handleInstallClick);
+
+window.addEventListener("beforeinstallprompt", function(e) {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (gibText && gibBtn) { gibText.textContent = "一键安装到桌面"; gibBtn.textContent = "立即安装"; if (globalInstallBar) globalInstallBar.classList.remove("dismissed"); }
+});
+
+// =============================================
+// 实时时间 + 电量同步
+// =============================================
+function syncStatusBar() {
+  var timeEl = document.getElementById("liveTime");
+  var batEl  = document.getElementById("liveBattery");
+  if (!timeEl && !batEl) return;
+  function updateTime() {
+    if (!timeEl) return;
+    var now = new Date();
+    var h = now.getHours();
+    var m = now.getMinutes();
+    timeEl.textContent = h + ":" + (m < 10 ? "0" + m : m);
+  }
+  function updateBattery(level, charging) {
+    if (!batEl) return;
+    var pct = Math.round(level * 100);
+    var blocks = Math.round(pct / 10);
+    var bar = "";
+    for (var i = 0; i < 10; i++) { bar += i < blocks ? "▮" : "▯"; }
+    batEl.textContent = bar + " " + pct + "%";
+    if (charging) batEl.textContent += " ⚡";
+  }
+  updateTime();
+  setInterval(updateTime, 30000);
+  if (navigator.getBattery) {
+    navigator.getBattery().then(function(bat) {
+      updateBattery(bat.level, bat.charging);
+      bat.addEventListener("levelchange", function() { updateBattery(bat.level, bat.charging); });
+      bat.addEventListener("chargingchange", function() { updateBattery(bat.level, bat.charging); });
+    });
+  } else if (batEl) { batEl.textContent = "▮▮▮▮ ▮▮▮▮ --"; }
+}
+
 
 // =============================================
 // 桌面角标管理
