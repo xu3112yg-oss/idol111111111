@@ -1063,12 +1063,17 @@ body {
 }
 .compose-title { font-size: 16px; font-weight: 600; color: #fff; }
 .compose-submit {
-  background: linear-gradient(135deg, #FF6BA6, #C44569);
-  border: none; border-radius: 18px; padding: 7px 18px;
-  color: #fff; font-size: 14px; font-weight: 600; cursor: pointer;
-  transition: opacity .15s;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 8px; padding: 8px 20px;
+  color: rgba(255,255,255,.85); font-size: 14px; font-weight: 500;
+  cursor: pointer; letter-spacing: .5px;
+  transition: background .2s, border-color .2s;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
 }
-.compose-submit:disabled { opacity: .35; cursor: not-allowed; }
+.compose-submit:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.25); }
+.compose-submit:disabled { opacity: .25; cursor: not-allowed; }
+.compose-submit:disabled:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.15); }
 
 .compose-text {
   width: 100%;
@@ -1112,6 +1117,22 @@ body {
   color: #fff; font-size: 16px; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
 }
+
+/* 发布弹窗各平台主题 */
+.compose-overlay.theme-instagram .compose-submit { border-color: rgba(220,39,67,.3); color: #dc2743; }
+.compose-overlay.theme-instagram .compose-submit:hover { background: rgba(220,39,67,.1); border-color: rgba(220,39,67,.5); }
+.compose-overlay.theme-instagram .compose-text::placeholder { color: rgba(220,39,67,.2); }
+.compose-overlay.theme-instagram .compose-sheet { background: #0d0d0d; }
+
+.compose-overlay.theme-twitter .compose-submit { border-color: rgba(29,155,240,.3); color: #1d9bf0; }
+.compose-overlay.theme-twitter .compose-submit:hover { background: rgba(29,155,240,.1); border-color: rgba(29,155,240,.5); }
+.compose-overlay.theme-twitter .compose-text::placeholder { color: rgba(29,155,240,.2); }
+.compose-overlay.theme-twitter .compose-sheet { background: #000; }
+
+.compose-overlay.theme-bubble .compose-submit { border-color: rgba(255,107,166,.3); color: #FF6BA6; }
+.compose-overlay.theme-bubble .compose-submit:hover { background: rgba(255,107,166,.1); border-color: rgba(255,107,166,.5); }
+.compose-overlay.theme-bubble .compose-text::placeholder { color: rgba(255,107,166,.2); }
+.compose-overlay.theme-bubble .compose-sheet { background: #1a1a2e; }
 
 /* =============================================
    响应式

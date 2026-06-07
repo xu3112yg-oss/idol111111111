@@ -515,9 +515,14 @@ function closeApp() {
 // =============================================
 function showScreen(id) {
   currentScreen = id;
-  Object.keys(screens).forEach((key) => {
+  Object.keys(screens).forEach(function(key) {
     screens[key].classList.toggle("hidden", key !== id);
   });
+  // 私密平台隐藏发布按钮
+  if (fabPost) {
+    if (id === "feed" && isPublicPlatform()) fabPost.style.display = "flex";
+    else fabPost.style.display = "none";
+  }
 }
 
 // =============================================
@@ -775,6 +780,11 @@ function saveUserPosts(posts) {
 
 function openComposer() {
   composeOverlay.classList.remove("hidden");
+  // 各平台主题
+  composeOverlay.className = composeOverlay.className.replace(/theme-\w+/g, "").replace(/\s+/g, " ").trim();
+  if (currentApp === "twitter") composeOverlay.classList.add("theme-twitter");
+  else if (currentApp === "instagram") composeOverlay.classList.add("theme-instagram");
+  else if (currentApp === "bubble") composeOverlay.classList.add("theme-bubble");
   composeText.value = "";
   composeImageData = null;
   composePreview.classList.add("hidden");
@@ -1334,7 +1344,9 @@ function handleInstallClick() {
   }
 }
 
-safeClick(gibBtn, handleInstallClick);
+if (gibBtn) {
+  gibBtn.addEventListener("click", handleInstallClick);
+}
 
 window.addEventListener("beforeinstallprompt", function(e) {
   e.preventDefault();
