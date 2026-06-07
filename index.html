@@ -290,15 +290,7 @@
   <div class="global-install-bar" id="globalInstallBar">
     <span class="gib-icon">📱</span>
     <span class="gib-text" id="gibText">添加到主屏幕，像 App 一样使用</span>
-    <button class="gib-btn" id="gibBtn" onclick="(function(){
-      var ua=navigator.userAgent||'';
-      var isIOS=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-      var s=isIOS?'<b>1.</b> 点浏览器底部 <b>分享按钮</b> ⎋<br><b>2.</b> 找到 <b>「添加到主屏幕」</b><br><b>3.</b> 点击 <b>「添加」</b> 完成 ✨':'<b>1.</b> 点浏览器 <b>菜单（⋮）</b><br><b>2.</b> 找到 <b>「添加到主屏幕」</b><br><b>3.</b> 桌面出现 idol 图标 ✨';
-      var d=document.createElement('div');d.className='install-tip-overlay';
-      d.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.9);display:flex;align-items:flex-end;justify-content:center;padding:16px;';
-      d.innerHTML='<div style=background:#1e1e32;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:28px 24px 20px;width:100%;max-width:340px;text-align:center;color:#fff><div style=font-size:40px;margin-bottom:10px>📱</div><div style=font-size:17px;font-weight:700;margin-bottom:10px>添加到主屏幕</div><div style=color:rgba(255,255,255,.5);font-size:13px;line-height:2;text-align:left>'+s+'</div><button style=margin-top:18px;padding:12px 0;width:100%;border-radius:14px;border:none;background:linear-gradient(135deg,#FF6BA6,#C44569);color:#fff;font-size:15px;font-weight:600 onclick=this.closest(&quot;.install-tip-overlay&quot;).remove()>知道了</button></div>';
-      document.body.appendChild(d);d.onclick=function(e){if(e.target===d)d.remove()};
-    })()">安装</button>
+    <button class="gib-btn" id="gibBtn" onclick="alert('点击成功！若看到此弹窗说明按钮正常，问题在弹窗渲染。')">测试</button>
   </div>
 
   <!-- 发布动态弹窗 -->
