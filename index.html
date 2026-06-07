@@ -126,21 +126,6 @@
       <button class="setup-btn" id="setupBtn">✦ 进入我的偶像生活</button>
       <p class="setup-hint" id="setupHint"></p>
     </div>
-
-    <!-- 安装引导条 -->
-    <div class="install-banner" id="installBanner">
-      <div class="install-banner-icon">
-        <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0" y="0" width="60" height="60" rx="14" fill="#2d2658" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
-          <text x="30" y="38" text-anchor="middle" font-size="18" font-weight="700" fill="#fff" font-family="sans-serif" letter-spacing="1">idol</text>
-        </svg>
-      </div>
-      <div class="install-banner-text">
-        <div class="install-banner-title" id="installTitle">安装到主屏幕</div>
-        <div class="install-banner-desc" id="installDesc">像原生 App 一样打开，体验更好</div>
-      </div>
-      <button class="install-banner-btn" id="installBtn">安装</button>
-    </div>
   </div>
 
   <!-- ====== 手机主界面 ====== -->
@@ -148,8 +133,8 @@
 
     <!-- 状态栏 -->
     <div class="status-bar">
-      <span class="time">9:41</span>
-      <span class="status-icons">▮▮▮▮ ▮▮▮▮ 100%</span>
+      <span class="time" id="liveTime">9:41</span>
+      <span class="status-icons" id="liveBattery">▮▮▮▮ ▮▮▮▮ 100%</span>
     </div>
 
     <!-- ====== 主屏幕（应用桌面） ====== -->
@@ -164,7 +149,7 @@
 
           <!-- KakaoTalk -->
           <div class="app-item" data-app="kakaotalk">
-            <div class="app-icon kakaotalk">
+            <div class="app-icon kakaotalk"><span class="app-badge" id="badgeKakao"></span>
               <svg viewBox="0 0 68 68" class="icon-svg">
                 <rect x="0" y="0" width="68" height="68" rx="17" fill="#FEE500"/>
                 <path d="M34 12c-11 0-20 7-20 15.5S23 43 34 43c1.5 0 3-.2 4.3-.5l7 3.5c.4.2.8-.2.7-.6l-1.2-5.5c4.5-2.2 7.2-6.5 7.2-11.4S45 12 34 12z" fill="#fff"/>
@@ -180,7 +165,7 @@
 
           <!-- Instagram -->
           <div class="app-item" data-app="instagram">
-            <div class="app-icon instagram">
+            <div class="app-icon instagram"><span class="app-badge" id="badgeInsta"></span>
               <svg viewBox="0 0 68 68" class="icon-svg">
                 <defs>
                   <linearGradient id="ig-grad" x1="0" y1="1" x2="1" y2="0">
@@ -201,7 +186,7 @@
 
           <!-- 微信 -->
           <div class="app-item" data-app="wechat">
-            <div class="app-icon wechat">
+            <div class="app-icon wechat"><span class="app-badge" id="badgeWechat"></span>
               <svg viewBox="0 0 68 68" class="icon-svg">
                 <rect x="0" y="0" width="68" height="68" rx="18" fill="#2BBF6A"/>
                 <ellipse cx="43" cy="31" rx="15" ry="12" fill="#fff"/>
@@ -219,7 +204,7 @@
 
           <!-- X (Twitter) -->
           <div class="app-item" data-app="twitter">
-            <div class="app-icon twitter">
+            <div class="app-icon twitter"><span class="app-badge" id="badgeTwitter"></span>
               <svg viewBox="0 0 68 68" class="icon-svg">
                 <rect x="0" y="0" width="68" height="68" rx="17" fill="#000"/>
                 <path d="M35 31.5L46 18h-2.8l-9 11.3L27 18H17l11.5 15.8L17 46.5h2.8l9.5-11 7.7 11H47L35 31.5zm-3.8 3.8l-1-1.5L20 20.5h3.5l7 9.8 1 1.5 9.5 13h-3.5l-8.3-11.5z" fill="#fff"/>
@@ -230,7 +215,7 @@
 
           <!-- Bubble -->
           <div class="app-item" data-app="bubble">
-            <div class="app-icon bubble">
+            <div class="app-icon bubble"><span class="app-badge" id="badgeBubble"></span>
               <svg viewBox="0 0 68 68" class="icon-svg">
                 <defs>
                   <linearGradient id="bb-grad" x1="0" y1="0" x2="1" y2="1">
@@ -279,6 +264,7 @@
           <div class="feed-scroll">
             <div class="feed-items" id="feedItems"></div>
           </div>
+          <button class="fab-post" id="fabPost" title="发布动态">+</button>
         </div>
 
         <!-- 对话详情页 -->
@@ -305,6 +291,29 @@
     <span class="gib-icon">📱</span>
     <span class="gib-text" id="gibText">安装到桌面，像 App 一样使用</span>
     <button class="gib-btn" id="gibBtn">安装</button>
+  </div>
+
+  <!-- 发布动态弹窗 -->
+  <div class="compose-overlay hidden" id="composeOverlay">
+    <div class="compose-sheet">
+      <div class="compose-header">
+        <button class="compose-cancel" id="composeCancel">取消</button>
+        <span class="compose-title">发布动态</span>
+        <button class="compose-submit" id="composeSubmit">发布</button>
+      </div>
+      <textarea class="compose-text" id="composeText" placeholder="想发点什么..." maxlength="500"></textarea>
+      <div class="compose-image-area" id="composeImageArea">
+        <label class="compose-add-img" id="composeAddImg">
+          <input type="file" accept="image/*" id="composeImgInput" hidden />
+          <span class="add-img-icon">🖼</span>
+          <span>添加图片</span>
+        </label>
+      </div>
+      <div class="compose-preview hidden" id="composePreview">
+        <img id="composePreviewImg" src="" />
+        <button class="compose-remove-img" id="composeRemoveImg">✕</button>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>

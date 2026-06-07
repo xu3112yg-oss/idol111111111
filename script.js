@@ -378,10 +378,18 @@ const data_bubble = {
       messages: [
         { from: "fan", text: "언니! 오늘 무대 진짜 최고였어요 ㅠㅠ", tr: "姐姐！今天的舞台真的太棒了 ㅠㅠ" },
         { from: "fan", text: "특히 마지막 곡에서 눈물 날 뻔했어요...", tr: "特别是最后一首歌差点哭了..." },
+        { from: "fan", text: "제가 찍은 직캠 벌써 만뷰 넘었어요!", tr: "我拍的直拍已经破万观看了！" },
         { from: "self", text: "고마워요~ 오늘 정말 신경 많이 썼는데 그렇게 말해줘서 힘이 나요 💕", tr: "谢谢～今天真的很用心准备了，听到你这么说给了我力量 💕" },
         { from: "fan", text: "다음 주 팬싸인회에서 꼭 만나요! 제가 쓴 편지 꼭 읽어주세요!", tr: "下周签售会一定要见面！我写的信一定要读哦！" },
         { from: "self", text: "기대할게요! 편지 꼭 읽을게요 약속! 🤙💕", tr: "我会期待的！信一定会读的，约定！ 🤙💕" },
+        { from: "fan", text: "아 맞다! 언니 생일 선물로 팬들이 기부도 했어요!", tr: "啊对了！粉丝们以姐姐的名义做了生日捐款！" },
+        { from: "fan", text: "동물 보호소에 1000만원 기부했어요. 언니 이름으로요 💕", tr: "向动物保护所捐了1000万韩元。以姐姐的名义 💕" },
+        { from: "self", text: "세상에... 진짜요? 너무 감동이에요 ㅠㅠ 여러분 정말 대단해요", tr: "天哪...真的吗？太感动了 ㅠㅠ 大家真的太厉害了" },
+        { from: "fan", text: "언니가 동물을 좋아한다고 어디서 말했잖아요! 그래서 생각했어요", tr: "姐姐不是在哪儿说过喜欢动物嘛！所以我们想到了这个" },
+        { from: "self", text: "맞아요... 제가 제일 관심 있는 일이에요. 진짜 여러분 최고예요 💝", tr: "对啊...这是我最关心的事。真的你们最棒了 💝" },
+        { from: "fan", text: "언니 행복하면 우리도 행복해요! 내일도 파이팅!", tr: "姐姐幸福的话我们也幸福！明天也加油！" },
       ],
+
     },
     {
       id: "bb2", name: "민트초코", preview: "보고 싶어요... 내일 브이라이브 하나요?", time: "5분 전", badge: 1,
@@ -392,6 +400,12 @@ const data_bubble = {
         { from: "self", text: "오늘은 연습실에서 하루 종일 안무 연습했어요~ 좀 힘들었지만 재밌었어요 ㅎㅎ", tr: "今天在练习室练了一整天舞～虽然有点累但很有趣 嘿嘿" },
         { from: "fan", text: "와... 진짜 고생하셨어요! 제가 커피라도 보내드리고 싶어요 ☕", tr: "哇...真的辛苦了！我想给您送杯咖啡 ☕" },
         { from: "self", text: "아이고 마음만 받을게요~ 그 마음이 더 따뜻해요 💕", tr: "哎呀心意我收下了～这份心意更温暖 💕" },
+        { from: "fan", text: "언니! 저 오늘 학교에서 발표했는데 언니 노래 들으면서 준비했어요!", tr: "姐姐！我今天在学校做发表了，边听姐姐的歌边准备的！" },
+        { from: "fan", text: "긴장됐는데 언니 목소리 듣고 마음이 편안해졌어요. 진짜예요!", tr: "本来很紧张，但听了姐姐的声音心里就平静了。真的！" },
+        { from: "self", text: "와 정말요? 제 노래가 도움이 됐다니 너무 기뻐요! 발표 잘했어요?", tr: "哇真的吗？我的歌能帮到你太开心了！发表顺利吗？" },
+        { from: "fan", text: "네! 최우수상 받았어요 ㅠㅠ 언니 덕분이에요!", tr: "是的！得了最优秀奖 ㅠㅠ 多亏了姐姐！" },
+        { from: "self", text: "축하해요!! 진짜 자랑스러워요. 제 팬이 이렇게 멋진 사람이라니 💕", tr: "恭喜！！真的好骄傲。我的粉丝竟然是这么棒的人 💕" },
+        { from: "fan", text: "다음에 꼭 직접 만나서 말하고 싶어요. 그날까지 열심히 살게요!", tr: "下次一定要当面说。在那之前会努力生活的！" },
       ],
     },
     {
@@ -403,6 +417,11 @@ const data_bubble = {
         { from: "self", text: "ありがとうございます！日本語でメッセージ嬉しいです 🥰", tr: "谢谢！收到日文消息很开心 🥰" },
         { from: "fan", text: "来月の東京コンサート、チケット取れました！初めて生で見られます！", tr: "下个月东京演唱会我抢到票了！第一次能看现场！" },
         { from: "self", text: "わぁ！初めてなんですね！特別な夜にしましょうね 💕", tr: "哇！是第一次啊！让它成为一个特别的夜晚吧 💕" },
+        { from: "fan", text: "花音さんのどの曲が一番好きか毎日変わります！最近はMoonlightです 🌙", tr: "花音小姐最喜欢的歌每天都在变！最近是Moonlight 🌙" },
+        { from: "fan", text: "日本のファンミーティングの時、日本語で手紙を書きました。届いてますか？", tr: "日本粉丝见面会的时候，用日语写了信。收到了吗？" },
+        { from: "self", text: "Moonlightは私も大好きな曲です！手紙もちゃんと読みましたよ。感動しました 🥺", tr: "Moonlight也是我很喜欢的歌！信也认真读过了。很感动 🥺" },
+        { from: "fan", text: "本当ですか！嬉しいです！次のアルバムも絶対買います！", tr: "真的吗！太开心了！下一张专辑也一定会买的！" },
+        { from: "self", text: "応援ありがとうございます！日本ツアーで会いましょうね 🇯🇵💕", tr: "谢谢支持！日本巡演时见面吧 🇯🇵💕" },
       ],
     },
     {
@@ -473,7 +492,9 @@ function openApp(appId) {
   navAction.textContent = config.navAction || "";
 
   renderChatList(data.chatList);
+  applyDynamicTimes(data.feedItems);
   refreshFeed();
+  startMessageArrival();
   renderTabs(data.tabs);
 
   showScreen("chatlist");
@@ -485,6 +506,8 @@ function closeApp() {
   appView.classList.remove("active");
   homeScreen.classList.remove("hidden");
   currentApp = null;
+  stopMessageArrival();
+  updateAllBadges();
 }
 
 // =============================================
@@ -602,11 +625,50 @@ function openConversation(chatId) {
   showScreen("conv");
 
   convMessages.innerHTML = "";
-  chat.messages.forEach((msg) => {
-    renderConvMessage(msg);
-  });
-  scrollConvBottom();
   convInput.focus();
+
+  // Bubble：消息逐条到达，模拟粉丝正在发消息
+  if (currentApp === "bubble" && chat.role === "fan") {
+    var msgs = chat.messages.slice();
+    var i = 0;
+    function showNext() {
+      if (i >= msgs.length) return;
+      var msg = msgs[i];
+      // 粉丝消息从"对方"发出，偶像消息从"自己"发出
+      if (msg.from === "fan" || msg.from === "other") {
+        // 显示"正在输入..."
+        var typing = document.createElement("div");
+        typing.className = "conv-msg from";
+        typing.textContent = "...";
+        typing.style.opacity = ".4";
+        typing.id = "bubbleTyping";
+        convMessages.appendChild(typing);
+        scrollConvBottom();
+
+        setTimeout(function() {
+          var t = document.getElementById("bubbleTyping");
+          if (t) t.remove();
+          renderConvMessage(msg);
+          scrollConvBottom();
+          i++;
+          setTimeout(showNext, 400 + Math.random() * 1200);
+        }, 600 + Math.random() * 1500);
+      } else {
+        // 偶像自己的消息直接显示（之前发过的）
+        renderConvMessage(msg);
+        scrollConvBottom();
+        i++;
+        setTimeout(showNext, 200 + Math.random() * 600);
+      }
+    }
+    showNext();
+  } else {
+    // 其他 App：一次性加载所有消息
+    chat.messages.forEach(function(msg) {
+      renderConvMessage(msg);
+    });
+    scrollConvBottom();
+  }
 }
 
 function renderConvMessage(msg) {
@@ -694,14 +756,12 @@ function sendMessage() {
 // =============================================
 // 本地智能回复引擎
 // =============================================
-var convMemory = {}; // 记录每个对话的最近回复，避免重复
+var convMemory = {}; // 记录每个对话的最近回复 + 上下文轮次
 
 // 关键词 → 话题分类
 function detectTopic(text, appId) {
   var t = text.toLowerCase();
   var topics = [];
-
-  // 通用关键词（中韩英）
   var kw = {
     greeting:  ["안녕","hi","hello","hey","在吗","早上好","晚上好","早安","晚安","하이","방가워요"],
     thanks:    ["谢谢","고마워","thank","감사","thanks","고맙","thx","谢谢你","谢谢啦"],
@@ -717,54 +777,103 @@ function detectTopic(text, appId) {
     weather:   ["天气","날씨","weather","下雨","비","sunny","冷","추워","热","더워"],
     happy:     ["开心","좋아","happy","기분","신나","excited","太棒","최고","좋다"],
   };
-
   for (var topic in kw) {
     for (var i = 0; i < kw[topic].length; i++) {
-      if (t.indexOf(kw[topic][i]) >= 0) {
-        topics.push(topic);
-        break;
-      }
+      if (t.indexOf(kw[topic][i]) >= 0) { topics.push(topic); break; }
     }
   }
   return topics.length > 0 ? topics : ["general"];
 }
 
-// 上次使用的回复索引（避免重复）
 function getConvKey() {
   return currentApp + "_" + (activeChat ? activeChat.id : "general");
 }
 
 var lastReplyIdx = {};
-
 function pickReply(pool, convKey) {
   if (!lastReplyIdx[convKey]) lastReplyIdx[convKey] = -1;
   var idx;
-  do {
-    idx = Math.floor(Math.random() * pool.length);
-  } while (idx === lastReplyIdx[convKey] && pool.length > 1);
+  do { idx = Math.floor(Math.random() * pool.length); }
+  while (idx === lastReplyIdx[convKey] && pool.length > 1);
   lastReplyIdx[convKey] = idx;
   return pool[idx];
 }
 
-// 智能回复主题库
+// 判断是否为群聊
+function isGroupChat() {
+  if (!activeChat) return false;
+  var name = activeChat.name || "";
+  return name.indexOf("群") >= 0 || name.indexOf("단톡") >= 0 || name.indexOf("팀") >= 0;
+}
+
+// 群聊成员
+var groupMembers = {
+  "댄스팀 단톡": ["댄서 오빠","지수","민지","안무 선생님"],
+  "宣传组工作群": ["宣传组小陈","设计师小王","文案小刘","摄影师老张"],
+};
+
+function getGroupReplier() {
+  if (!activeChat) return "";
+  var members = groupMembers[activeChat.name] || ["成员A","成员B"];
+  return members[Math.floor(Math.random() * members.length)];
+}
+
+// 对话上下文追踪（轮次 + 话题）
+function getTopicRound(convKey, topic) {
+  if (!convMemory[convKey]) convMemory[convKey] = {};
+  if (!convMemory[convKey][topic]) convMemory[convKey][topic] = 0;
+  convMemory[convKey][topic]++;
+  return convMemory[convKey][topic];
+}
+
+// 差异化回复延迟
+function getReplyDelay() {
+  if (!activeChat) return 800;
+  var name = activeChat.name || "";
+  if (isGroupChat()) return 500 + Math.random() * 800;
+  if (name.indexOf("엄마") >= 0 || name.indexOf("妈妈") >= 0) return 1000 + Math.random() * 2000;
+  if (name.indexOf("매니저") >= 0 || name.indexOf("经纪") >= 0) return 600 + Math.random() * 1500;
+  if (currentApp === "bubble") return 1500 + Math.random() * 3000;
+  return 400 + Math.random() * 1000;
+}
+
+// 群聊回复前缀
+function groupPrefix() {
+  if (!isGroupChat()) return "";
+  return "[" + getGroupReplier() + "] ";
+}
+
+// ===== 智能回复主题库（扩充版含轮次）=====
 var smartPools = {
   kakaotalk: {
-    greeting:  [{text:"안녕~ 오늘도 예쁘게 지내고 있어?", tr:"嗨～今天也过得好吗？"},{text:"헐! 연락 고마워 ㅎㅎ 보고 싶었어!", tr:"哇！谢谢联系我 嘿嘿 想你了！"},{text:"안녕!! 오늘 하루 어땠어? 난 방금 연습 끝났어~", tr:"嗨！！今天过得怎么样？我刚练习完～"}],
-    thanks:    [{text:"아이고 고마워~ 네가 더 예뻐!", tr:"哎呀谢谢～你更漂亮！"},{text:"칭찬 고마워! 힘이 난다 ㅎㅎ", tr:"谢谢夸奖！有力量了 哈哈"},{text:"에이~ 부끄럽게... 그래도 고마워 💕", tr:"哎呀～让人害羞...但还是谢谢 💕"}],
-    tired:     [{text:"아~ 진짜? 나도 오늘 완전 힘들었어 ㅠㅠ 같이 힘내자!", tr:"啊～真的？我今天也超累的 ㅠㅠ 一起加油！"},{text:"맞아맞아... 그래도 네 메시지에 힘난다!", tr:"对对...不过你的消息给了我力量！"},{text:"푹 쉬어! 몸이 제일 중요해. 내일은 좀 나을 거야 💪", tr:"好好休息！身体最重要。明天会好一点的 💪"}],
-    food:      [{text:"나 방금 떡볶이 먹었어! 완전 맛있었어 ㅋㅋ", tr:"我刚吃了炒年糕！超级好吃 哈哈"},{text:"밥은 꼭 챙겨 먹어! 건강이 제일 중요해~", tr:"一定要按时吃饭！健康最重要～"},{text:"아 배고파... 너 뭐 먹었어? 추천 좀 해줘!", tr:"啊好饿...你吃了什么？推荐一下！"}],
-    practice:  [{text:"오늘 연습실에서 6시간 있었어 ㅠㅠ 다리가 안 움직여", tr:"今天在练习室待了6小时 ㅠㅠ 腿都动不了了"},{text:"새 안무 연습 중이야! 생각보다 어려운데 재밌어", tr:"在练新编舞！比想象中难但是很有趣"},{text:"연습할 때마다 느끼는 건데, 역시 노력이 답이야 💪", tr:"每次练习都感觉到，努力果然是答案 💪"}],
-    stage:     [{text:"무대 생각만 해도 떨려! 하지만 설레기도 하고...", tr:"光是想到舞台就紧张！但也挺心动的..."},{text:"어제 무대에서 실수할 뻔 했는데 다행히 괜찮았어 ㅎㅎ", tr:"昨天舞台上差点失误了，幸好没事 哈哈"},{text:"팬들 함성소리 들으면 진짜 눈물 날 것 같아 ㅠㅠ", tr:"听到粉丝的欢呼声真的会想哭 ㅠㅠ"}],
-    miss:      [{text:"나도 진짜 보고 싶어 ㅠㅠ 언제 만날 수 있을까?", tr:"我也真的好想你 ㅠㅠ 什么时候能见面？"},{text:"보고 싶다고 말해줘서 고마워... 진짜 힘이 돼", tr:"谢谢你告诉我想我...真的很有力量"},{text:"우리 꼭 조만간 만나자! 약속해!", tr:"我们一定很快见面的！约定！"}],
-    support:   [{text:"파이팅 넘치게 응원해줘서 고마워! 나도 힘낼게!", tr:"谢谢你这么用力地支持我！我也会加油的！"},{text:"응원 소리 들으니까 더 열심히 해야겠다는 생각이 들어!", tr:"听到应援声就觉得要更加努力了！"},{text:"너의 응원이 내 원동력이야 진짜로! 🥺💕", tr:"你的应援真的是我的原动力！ 🥺💕"}],
-    schedule:  [{text:"내일 스케줄? 아침부터 저녁까지 꽉 차있어 ㅠㅠ", tr:"明天的行程？从早到晚排满了 ㅠㅠ"},{text:"이번 주 진짜 바빠! 그래도 재밌는 일들이야", tr:"这周真的忙！不过都是有趣的事"},{text:"주말엔 좀 쉴 수 있을 것 같아! 영화 보러 갈까?", tr:"周末好像可以休息一下！去看电影吗？"}],
-    health:    [{text:"걱정해줘서 고마워! 요즘 컨디션 관리 잘 하고 있어", tr:"谢谢关心！最近状态管理得很好"},{text:"감기 조심해! 나도 어제 목이 좀 아팠어...", tr:"小心感冒！我昨天嗓子也有点疼..."},{text:"비타민 꼭 챙겨 먹어! 건강이 제일이야", tr:"一定要吃维生素！健康第一"}],
-    album:     [{text:"새 앨범? 흠... 말할 수 있는 건, 진짜 좋아! 🤫", tr:"新专辑？嗯...能说的是，真的很棒！ 🤫"},{text:"이번 앨범에 내가 작사한 곡이 있어! 기대해줘!", tr:"这次专辑里有我作词的歌！敬请期待！"},{text:"컴백 준비 열심히 하고 있어! 조금만 기다려줘 💕", tr:"在努力准备回归！再等我一下 💕"}],
-    general:   [{text:"ㅋㅋㅋ 맞아맞아 완전 공감해!", tr:"哈哈哈对对完全同感！"},{text:"아~ 그렇구나! 나도 그런 적 있어", tr:"啊～原来如此！我也有过这样的经历"},{text:"얘기해줘서 고마워! 다음에 또 연락해~", tr:"谢谢你跟我说！下次再联系～"},{text:"진짜? 대박! 나도 완전 신나!", tr:"真的吗？太厉害了！我也超兴奋！"},{text:"좋은 하루 보내! 내일 또 연락할게 💜", tr:"过个好日子！明天再联系 💜"}],
+    greeting:  [{text:"안녕~ 오늘도 예쁘게 지내고 있어?",tr:"嗨～今天也过得好吗？"},{text:"헐! 연락 고마워 ㅎㅎ 보고 싶었어!",tr:"哇！谢谢联系我 嘿嘿 想你了！"},{text:"안녕!! 오늘 하루 어땠어? 난 방금 연습 끝났어~",tr:"嗨！！今天过得怎么样？我刚练习完～"}],
+    thanks:    [{text:"아이고 고마워~ 네가 더 예뻐!",tr:"哎呀谢谢～你更漂亮！"},{text:"칭찬 고마워! 힘이 난다 ㅎㅎ",tr:"谢谢夸奖！有力量了 哈哈"},{text:"에이~ 부끄럽게... 그래도 고마워 💕",tr:"哎呀～让人害羞...但还是谢谢 💕"}],
+    tired:     [{text:"아~ 진짜? 나도 오늘 완전 힘들었어 ㅠㅠ 같이 힘내자!",tr:"啊～真的？我今天也超累的 ㅠㅠ 一起加油！"},{text:"맞아맞아... 그래도 네 메시지에 힘난다!",tr:"对对...不过你的消息给了我力量！"},{text:"푹 쉬어! 몸이 제일 중요해. 내일은 좀 나을 거야 💪",tr:"好好休息！身体最重要。明天会好一点的 💪"}],
+    food:      [{text:"나 방금 떡볶이 먹었어! 완전 맛있었어 ㅋㅋ",tr:"我刚吃了炒年糕！超级好吃 哈哈"},{text:"밥은 꼭 챙겨 먹어! 건강이 제일 중요해~",tr:"一定要按时吃饭！健康最重要～"},{text:"아 배고파... 너 뭐 먹었어? 추천 좀 해줘!",tr:"啊好饿...你吃了什么？推荐一下！"}],
+    practice:  [{text:"오늘 연습실에서 6시간 있었어 ㅠㅠ 다리가 안 움직여",tr:"今天在练习室待了6小时 ㅠㅠ 腿都动不了了"},{text:"새 안무 연습 중이야! 생각보다 어려운데 재밌어",tr:"在练新编舞！比想象中难但是很有趣"},{text:"연습할 때마다 느끼는 건데, 역시 노력이 답이야 💪",tr:"每次练习都感觉到，努力果然是答案 💪"}],
+    stage:     [{text:"무대 생각만 해도 떨려! 하지만 설레기도 하고...",tr:"光是想到舞台就紧张！但也挺心动的..."},{text:"어제 무대에서 실수할 뻔 했는데 다행히 괜찮았어 ㅎㅎ",tr:"昨天舞台上差点失误了，幸好没事 哈哈"},{text:"팬들 함성소리 들으면 진짜 눈물 날 것 같아 ㅠㅠ",tr:"听到粉丝的欢呼声真的会想哭 ㅠㅠ"}],
+    miss:      [{text:"나도 진짜 보고 싶어 ㅠㅠ 언제 만날 수 있을까?",tr:"我也真的好想你 ㅠㅠ 什么时候能见面？"},{text:"보고 싶다고 말해줘서 고마워... 진짜 힘이 돼",tr:"谢谢你告诉我想我...真的很有力量"},{text:"우리 꼭 조만간 만나자! 약속해!",tr:"我们一定很快见面的！约定！"}],
+    support:   [{text:"파이팅 넘치게 응원해줘서 고마워! 나도 힘낼게!",tr:"谢谢你这么用力地支持我！我也会加油的！"},{text:"응원 소리 들으니까 더 열심히 해야겠다는 생각이 들어!",tr:"听到应援声就觉得要更加努力了！"},{text:"너의 응원이 내 원동력이야 진짜로! 🥺💕",tr:"你的应援真的是我的原动力！ 🥺💕"}],
+    schedule:  [{text:"내일 스케줄? 아침부터 저녁까지 꽉 차있어 ㅠㅠ",tr:"明天的行程？从早到晚排满了 ㅠㅠ"},{text:"이번 주 진짜 바빠! 그래도 재밌는 일들이야",tr:"这周真的忙！不过都是有趣的事"},{text:"주말엔 좀 쉴 수 있을 것 같아! 영화 보러 갈까?",tr:"周末好像可以休息一下！去看电影吗？"}],
+    health:    [{text:"걱정해줘서 고마워! 요즘 컨디션 관리 잘 하고 있어",tr:"谢谢关心！最近状态管理得很好"},{text:"감기 조심해! 나도 어제 목이 좀 아팠어...",tr:"小心感冒！我昨天嗓子也有点疼..."},{text:"비타민 꼭 챙겨 먹어! 건강이 제일이야",tr:"一定要吃维生素！健康第一"}],
+    album:     [{text:"새 앨범? 흠... 말할 수 있는 건, 진짜 좋아! 🤫",tr:"新专辑？嗯...能说的是，真的很棒！ 🤫"},{text:"이번 앨범에 내가 작사한 곡이 있어! 기대해줘!",tr:"这次专辑里有我作词的歌！敬请期待！"},{text:"컴백 준비 열심히 하고 있어! 조금만 기다려줘 💕",tr:"在努力准备回归！再等我一下 💕"}],
+    followup:  [{text:"근데 너는 어때? 요즘 재밌는 일 있어?",tr:"不过你呢？最近有什么有趣的事吗？"},{text:"아 맞다! 너 그거 들었어? 진짜 신기한 소식이야",tr:"啊对了！你听说了吗？真的是神奇的消息"},{text:"얘기하다 보니까 시간 가는 줄 몰랐네 ㅎㅎ 다음에 또 얘기하자!",tr:"聊着聊着没注意时间 哈哈 下次再聊！"},{text:"진짜? 자세히 얘기해 줘! 나 완전 궁금해",tr:"真的？详细说给我听！我完全好奇"}],
+    general:   [{text:"ㅋㅋㅋ 맞아맞아 완전 공감해!",tr:"哈哈哈对对完全同感！"},{text:"아~ 그렇구나! 나도 그런 적 있어",tr:"啊～原来如此！我也有过这样的经历"},{text:"얘기해줘서 고마워! 다음에 또 연락해~",tr:"谢谢你跟我说！下次再联系～"},{text:"진짜? 대박! 나도 완전 신나!",tr:"真的吗？太厉害了！我也超兴奋！"},{text:"좋은 하루 보내! 내일 또 연락할게 💜",tr:"过个好日子！明天再联系 💜"}],
   },
-
+  wechat: {
+    greeting:  [{text:"早啊～今天也要元气满满！",tr:"早啊～今天也要元气满满！"},{text:"在呢，刚忙完，怎么啦？",tr:"在呢，刚忙完，怎么啦？"}],
+    thanks:    [{text:"客气啦，应该的～",tr:"客气啦，应该的～"},{text:"谢谢！你也是，辛苦了",tr:"谢谢！你也是，辛苦了"}],
+    tired:     [{text:"确实有点累，不过还好，撑得住",tr:"确实有点累，不过还好，撑得住"},{text:"最近行程比较密，但忙得挺开心的",tr:"最近行程比较密，但忙得挺开心的"}],
+    food:      [{text:"还没吃呢，练完就去。你吃了吗？",tr:"还没吃呢，练完就去。你吃了吗？"},{text:"今天食堂的饭还不错，难得哈哈",tr:"今天食堂的饭还不错，难得哈哈"}],
+    practice:  [{text:"刚练完舞，今天的编舞进度不错",tr:"刚练完舞，今天的编舞进度不错"},{text:"还在练习室呢，一会儿还要录一段",tr:"还在练习室呢，一会儿还要录一段"}],
+    schedule:  [{text:"好的收到，我记下了！",tr:"好的收到，我记下了！"},{text:"没问题，时间我知道了，会准时到的",tr:"没问题，时间我知道了，会准时到的"}],
+    health:    [{text:"放心，我有在注意身体的。你也多保重",tr:"放心，我有在注意身体的。你也多保重"},{text:"最近睡眠还行，比之前好多了",tr:"最近睡眠还行，比之前好多了"}],
+    album:     [{text:"专辑在准备了，还不能说太多，但应该不会让大家失望",tr:"专辑在准备了，还不能说太多，但应该不会让大家失望"}],
+    followup:  [{text:"对了，你上次说的那件事怎么样了？",tr:"对了，你上次说的那件事怎么样了？"},{text:"回头细聊，我先去忙了哈",tr:"回头细聊，我先去忙了哈"},{text:"还有别的事吗？一起说了吧",tr:"还有别的事吗？一起说了吧"}],
+    general:   [{text:"收到！我看看再回复你",tr:"收到！我看看再回复你"},{text:"好的好的，我知道了",tr:"好的好的，我知道了"},{text:"嗯嗯，辛苦了辛苦了！",tr:"嗯嗯，辛苦了辛苦了！"},{text:"没问题，你安排吧。我相信你",tr:"没问题，你安排吧。我相信你"},{text:"好的～谢谢你通知我",tr:"好的～谢谢你通知我"}],
+  },
   instagram: {
-    greeting:  [{text:"Hi there! Thanks for reaching out 💕 How are you?",tr:"嗨！谢谢你发来消息 💕 你好吗？"}],
+    greeting:  [{text:"Hi there! Thanks for reaching out 💕",tr:"嗨！谢谢你发来消息 💕"},{text:"Hey! Always happy to see your DMs 💜",tr:"嘿！总是很高兴看到你的私信 💜"}],
     thanks:    [{text:"That's so kind of you! Really means the world 🥺",tr:"你太善良了！真的很重要 🥺"},{text:"Thank you for the love! You're amazing 💜",tr:"谢谢你的爱！你太棒了 💜"}],
     tired:     [{text:"Honestly same... been practicing all day. But your message helps!",tr:"说实话我也是...练了一整天。但你的消息有帮助！"},{text:"So tired but so worth it! The stage is calling 🎤",tr:"很累但是值得！舞台在呼唤 🎤"}],
     food:      [{text:"Just had some tteokbokki! Korean food is the best 😋",tr:"刚吃了炒年糕！韩国食物最棒了 😋"}],
@@ -773,21 +882,9 @@ var smartPools = {
     miss:      [{text:"I miss you all too! Can't wait for the next concert 🥺",tr:"我也想你们！等不及下次演唱会了 🥺"}],
     support:   [{text:"Your support keeps me going. Seriously. Thank you 💜",tr:"你的支持让我继续前进。真的。谢谢你 💜"},{text:"I have the best fans in the world. Don't fight me on this!",tr:"我有世界上最好的粉丝。别跟我争这个！"}],
     album:     [{text:"Can't say much but... something special is coming 🤫",tr:"不能说太多但是...特别的东西要来了 🤫"}],
+    followup:  [{text:"Anyway, how's your day going? Tell me something fun!",tr:"话说，你今天过得怎么样？跟我说点有趣的！"},{text:"I should go practice now, but DM me anytime! 💕",tr:"我得去练习了，但随时私信我！ 💕"}],
     general:   [{text:"Aww you're the sweetest! Made me smile 😊",tr:"哇你最甜了！让我笑了 😊"},{text:"Love that! Keep being awesome 💕",tr:"爱了！继续做最棒的 💕"},{text:"Honestly, fans like you are why I do this 🥺",tr:"说实话，像你这样的粉丝是我做这行的原因 🥺"},{text:"Sending you the biggest virtual hug! 🤗💜",tr:"给你最大的虚拟拥抱！ 🤗💜"}],
   },
-
-  wechat: {
-    greeting:  [{text:"早啊～今天也要元气满满！",tr:"早啊～今天也要元气满满！"}],
-    thanks:    [{text:"客气啦，应该的～",tr:"客气啦，应该的～"},{text:"谢谢！你也是，辛苦了",tr:"谢谢！你也是，辛苦了"}],
-    tired:     [{text:"确实有点累，不过还好，撑得住",tr:"确实有点累，不过还好，撑得住"},{text:"最近行程比较密，但忙得挺开心的",tr:"最近行程比较密，但忙得挺开心的"}],
-    food:      [{text:"还没吃呢，练完就去。你吃了吗？",tr:"还没吃呢，练完就去。你吃了吗？"}],
-    practice:  [{text:"刚练完舞，今天的编舞进度不错",tr:"刚练完舞，今天的编舞进度不错"},{text:"还在练习室呢，一会儿还要录一段",tr:"还在练习室呢，一会儿还要录一段"}],
-    schedule:  [{text:"好的收到，我记下了！",tr:"好的收到，我记下了！"},{text:"没问题，时间我知道了，会准时到的",tr:"没问题，时间我知道了，会准时到的"}],
-    health:    [{text:"放心，我有在注意身体的。你也多保重",tr:"放心，我有在注意身体的。你也多保重"},{text:"最近睡眠还行，比之前好多了",tr:"最近睡眠还行，比之前好多了"}],
-    album:     [{text:"专辑在准备了，还不能说太多，但应该不会让大家失望",tr:"专辑在准备了，还不能说太多，但应该不会让大家失望"}],
-    general:   [{text:"收到！我看看再回复你",tr:"收到！我看看再回复你"},{text:"好的好的，我知道了",tr:"好的好的，我知道了"},{text:"嗯嗯，辛苦了辛苦了！",tr:"嗯嗯，辛苦了辛苦了！"},{text:"没问题，你安排吧。我相信你",tr:"没问题，你安排吧。我相信你"},{text:"好的～谢谢你通知我",tr:"好的～谢谢你通知我"}],
-  },
-
   twitter: {
     greeting:  [{text:"heyy! thanks for the dm 💙",tr:"嘿！谢谢你的私信 💙"}],
     thanks:    [{text:"fr thank you. means everything 🫶",tr:"真的谢谢你。意味着一切 🫶"},{text:"y'all are too kind. seriously 🤍",tr:"你们都太善良了。真的 🤍"}],
@@ -795,9 +892,9 @@ var smartPools = {
     stage:     [{text:"the energy tonight was INSANE. thank you all! 🔥",tr:"今晚的能量太疯狂了。谢谢大家！ 🔥"}],
     support:   [{text:"best fandom. no cap. love you all 🫶",tr:"最好的粉丝群。不骗人。爱你们所有人 🫶"}],
     album:     [{text:"👀 that's all i'm gonna say...",tr:"👀 我就说这么多..."},{text:"stay tuned. trust me on this one 🤫",tr:"敬请期待。相信我这一次 🤫"}],
+    followup:  [{text:"anyways, gotta run. studio's calling 📞",tr:"话说，得走了。录音室在召唤 📞"},{text:"what else is new with you? spill the tea ☕",tr:"你还有什么新鲜事？说来听听 ☕"}],
     general:   [{text:"real ones know what's up 💯",tr:"懂的人都懂 💯"},{text:"haha fr fr. you get it",tr:"哈哈真的真的。你懂"},{text:"sending good vibes your way ✨",tr:"给你发送好的氛围 ✨"},{text:"this made my day. thank you 🥺",tr:"这让我开心了一整天。谢谢你 🥺"}],
   },
-
   bubble: {
     greeting:  [{text:"안녕! 오늘 하루 잘 보냈어요? 저는 방금 연습 끝났어요 ㅎㅎ",tr:"你好！今天过得好吗？我刚结束练习 嘿嘿"},{text:"우리 팬들~ 보고 싶어서 왔어요! 💕",tr:"我们的粉丝们～想你们了所以来了！ 💕"}],
     thanks:    [{text:"고마워요... 이런 말 들을 때마다 진짜 힘이 나요 💕",tr:"谢谢...每次听到这样的话就真的有力量 💕"},{text:"제가 더 감사하죠! 항상 곁에 있어줘서 고마워요 🥺",tr:"我更感谢才对！谢谢你一直在我身边 🥺"}],
@@ -809,6 +906,7 @@ var smartPools = {
     health:    [{text:"걱정해줘서 고마워요! 비타민도 챙겨 먹고 잘 자고 있어요~",tr:"谢谢担心我！维生素也在吃，也在好好睡觉～"},{text:"여러분도 감기 조심하세요! 건강이 제일 중요해요",tr:"大家也要小心感冒！健康最重要"}],
     album:     [{text:"사실... 새 앨범 준비 중이에요! 조금만 기다려 주세요 🤫💕",tr:"其实...在准备新专辑！再等一下下哦 🤫💕"},{text:"이번에 정말 특별한 노래가 있어요. 빨리 들려주고 싶어요!",tr:"这次有一首非常特别的歌。好想快点让你们听到！"}],
     weather:   [{text:"오늘 날씨 진짜 좋지 않아요? 산책하고 싶어요 ☀️",tr:"今天天气真的很好不是吗？好想去散步 ☀️"},{text:"비 오는 날은 연습실에 있기 딱 좋아요 ㅎㅎ",tr:"下雨天待在练习室刚刚好 嘿嘿"}],
+    followup:  [{text:"여러분은 오늘 뭐 했어요? 저도 궁금해요!",tr:"大家今天做了什么？我也很好奇！"},{text:"다음에 또 올게요! 우리 팬들 항상 사랑해요 💝",tr:"下次还会来的！我们粉丝们永远爱你们 💝"},{text:"아! 그리고 내일 깜짝 선물 준비했어요. 기대해 주세요 🎁",tr:"啊！还有明天准备了惊喜礼物。敬请期待 🎁"}],
     general:   [{text:"오늘 하루도 수고했어요! 우리 팬들 최고예요 💕",tr:"今天一天也辛苦了！我们粉丝最棒了 💕"},{text:"항상 고맙고 사랑해요. 내일도 연락할게요! 🥰",tr:"一直都很感谢也很爱你们。明天也会联系的！ 🥰"},{text:"편지 읽으면서 진짜 많이 울었어요... 감동이에요 ㅠㅠ",tr:"读信的时候真的哭了很多...太感动了 ㅠㅠ"},{text:"여러분은 제 인생의 선물이에요. 진심으로요 💝",tr:"你们是我人生的礼物。真心的 💝"},{text:"오늘 꿈에 팬들 나왔어요! 보고 싶어서 그런가 봐요 ㅎㅎ",tr:"今天梦到粉丝们了！可能是太想你们了吧 嘿嘿"}],
   },
 };
@@ -817,734 +915,184 @@ function smartReply(userText, appId) {
   var pool = smartPools[appId] || smartPools.kakaotalk;
   var topics = detectTopic(userText, appId);
   var convKey = getConvKey();
+  var topic = topics[0];
+  var round = getTopicRound(convKey, topic);
 
-  // 优先匹配话题，30%概率随机（增加变化）
-  var useRandom = Math.random() < 0.3;
-  var topic = useRandom ? topics[Math.floor(Math.random() * topics.length)] : topics[0];
-
-  // 确保话题存在，否则用 general
+  // 30%随机换个话题
+  if (Math.random() < 0.3) {
+    var keys = Object.keys(pool).filter(function(k) { return k !== "general"; });
+    topic = keys[Math.floor(Math.random() * keys.length)];
+  }
+  // 第二轮+有40%概率用追问回复
+  if (round > 1 && Math.random() < 0.4 && pool.followup) {
+    topic = "followup";
+  }
   if (!pool[topic]) topic = "general";
 
-  return pickReply(pool[topic], convKey);
-}
+  var reply = pickReply(pool[topic], convKey);
 
-// =============================================
-// 导航返回
-// =============================================
-function handleBack() {
-  if (currentScreen === "conv") {
-    const data = getAppData(currentApp);
-    navTitle.textContent = getAppConfig(currentApp).name;
-    showScreen("chatlist");
-    activeChat = null;
-    appTabs.querySelectorAll(".tab-item").forEach((t) => {
-      t.classList.toggle("active", t.dataset.screen === "chatlist");
-    });
-  } else {
-    closeApp();
+  // 群聊加前缀
+  if (isGroupChat()) {
+    reply = { text: groupPrefix() + reply.text, tr: groupPrefix() + reply.tr };
   }
+
+  return reply;
 }
 
 // =============================================
-// 事件绑定
+// 桌面角标管理
 // =============================================
-$$(".app-item").forEach((item) => {
-  item.addEventListener("click", () => {
-    const appId = item.dataset.app;
-    if (appId) openApp(appId);
-  });
-});
-
-$("#navBack").addEventListener("click", handleBack);
-
-convSend.addEventListener("click", sendMessage);
-convInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
-});
-
-// =============================================
-// 偶像资料管理（localStorage）
-// =============================================
-const PROFILE_KEY = "idol_profile";
-
-function loadProfile() {
-  try {
-    const raw = localStorage.getItem(PROFILE_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch (_) { return null; }
-}
-
-function saveProfile(data) {
-  localStorage.setItem(PROFILE_KEY, JSON.stringify(data));
-}
-
-// 回填表单
-function fillForm(data) {
-  setStageName.value = data.stageName || "";
-  setRealName.value  = data.realName || "";
-  setAge.value       = data.age || "";
-  setHeight.value    = data.height || "";
-  setDebutYear.value = data.debutYear || "";
-  setGroup.value     = data.group || "";
-  $$("#idolType .opt-chip").forEach(function(chip) {
-    chip.classList.toggle("active", chip.dataset.value === (data.idolType || "group"));
-  });
-  $$("#personality .opt-chip").forEach(function(chip) {
-    chip.classList.toggle("active", chip.dataset.value === (data.personality || "energetic"));
-  });
-}
-
-// 读取表单数据
-function readForm() {
-  const idolType = $("#idolType .opt-chip.active")?.dataset?.value || "group";
-  const personality = $("#personality .opt-chip.active")?.dataset?.value || "energetic";
-  return {
-    stageName:   setStageName.value.trim(),
-    realName:    setRealName.value.trim(),
-    age:         parseInt(setAge.value, 10) || 0,
-    height:      parseInt(setHeight.value, 10) || 0,
-    debutYear:   parseInt(setDebutYear.value, 10) || 0,
-    group:       setGroup.value.trim(),
-    idolType,
-    personality,
-  };
-}
-
-// =============================================
-// 设定页逻辑
-// =============================================
-function showSetupScreen(editMode) {
-  setupScreen.classList.remove("hidden");
-  phoneContainer.classList.remove("ready");
-  setupHint.textContent = "";
-
-  if (editMode) {
-    const profile = loadProfile();
-    if (profile) fillForm(profile);
-    setupBtn.textContent = "✦ 保存修改并进入";
-    setupHint.textContent = "正在修改「" + (profile?.stageName || "") + "」的身份设定";
-  } else {
-    setupBtn.textContent = "✦ 进入我的偶像生活";
-  }
-}
-
-function enterPhone() {
-  const profile = loadProfile();
-  if (!profile) return;
-
-  setupScreen.classList.add("hidden");
-  phoneContainer.classList.add("ready");
-  updateGreeting(profile.stageName);
-}
-
-function updateGreeting(name) {
-  if (homeGreeting) homeGreeting.textContent = name || "偶像";
-}
-
-// 表单验证
-function validateForm(data) {
-  if (!data.stageName) return "请输入艺名";
-  if (data.stageName.length < 1 || data.stageName.length > 12) return "艺名长度应为 1-12 个字符";
-  if (!data.age || data.age < 15 || data.age > 35) return "请输入合理的年龄（15-35）";
-  if (!data.debutYear || data.debutYear < 2010 || data.debutYear > 2026) return "请输入合理的出道年份（2010-2026）";
-  if (data.height && (data.height < 145 || data.height > 195)) return "请输入合理的身高（145-195cm）";
-  return null;
-}
-
-// 提交设定
-function submitProfile() {
-  const data = readForm();
-  const error = validateForm(data);
-  if (error) {
-    setupHint.textContent = "⚠ " + error;
-    setupHint.style.color = "#FF6B6B";
-    return;
-  }
-  saveProfile(data);
-  setupHint.style.color = "";
-  enterPhone();
-}
-
-// =============================================
-// 选项芯片点击
-// =============================================
-$$(".option-row").forEach((row) => {
-  row.querySelectorAll(".opt-chip").forEach((chip) => {
-    chip.addEventListener("click", () => {
-      row.querySelectorAll(".opt-chip").forEach((c) => c.classList.remove("active"));
-      chip.classList.add("active");
-    });
-  });
-});
-
-// =============================================
-// 发布动态功能
-// =============================================
-function getUserPostsKey() {
-  return "user_posts_" + currentApp;
-}
-
-function loadUserPosts() {
-  try {
-    return JSON.parse(localStorage.getItem(getUserPostsKey()) || "[]");
-  } catch (e) { return []; }
-}
-
-function saveUserPosts(posts) {
-  localStorage.setItem(getUserPostsKey(), JSON.stringify(posts));
-}
-
-function openComposer() {
-  composeOverlay.classList.remove("hidden");
-  composeText.value = "";
-  composeImageData = null;
-  composePreview.classList.add("hidden");
-  composeImageArea.classList.remove("hidden");
-  composeImgInput.value = "";
-  composeSubmit.disabled = true;
-  composeText.focus();
-}
-
-function closeComposer() {
-  composeOverlay.classList.add("hidden");
-}
-
-composeText.addEventListener("input", function() {
-  composeSubmit.disabled = !composeText.value.trim() && !composeImageData;
-});
-
-composeImgInput.addEventListener("change", function(e) {
-  var file = e.target.files && e.target.files[0];
-  if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    composeImageData = ev.target.result;
-    composePreviewImg.src = composeImageData;
-    composePreview.classList.remove("hidden");
-    composeImageArea.classList.add("hidden");
-    composeSubmit.disabled = false;
-  };
-  reader.readAsDataURL(file);
-});
-
-composeRemoveImg.addEventListener("click", function() {
-  composeImageData = null;
-  composePreview.classList.add("hidden");
-  composeImageArea.classList.remove("hidden");
-  composeImgInput.value = "";
-  composeSubmit.disabled = !composeText.value.trim();
-});
-
-composeCancel.addEventListener("click", closeComposer);
-composeOverlay.addEventListener("click", function(e) {
-  if (e.target === composeOverlay) closeComposer();
-});
-
-fabPost.addEventListener("click", openComposer);
-
-composeSubmit.addEventListener("click", function() {
-  var text = composeText.value.trim();
-  if (!text && !composeImageData) return;
-
-  var post = {
-    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-    text: text,
-    image: composeImageData || null,
-    time: "刚刚",
-    timestamp: Date.now(),
-    likes: 0,
-    liked: false,
-    comments: []
-  };
-
-  var posts = loadUserPosts();
-  posts.unshift(post);
-  saveUserPosts(posts);
-
-  closeComposer();
-
-  // 刷新动态页
-  if (currentScreen === "feed") {
-    refreshFeed();
-  }
-});
-
-function renderUserPost(post) {
-  var imgHtml = post.image
-    ? '<div class="feed-image" style="height:auto;background:transparent;"><img src="' + post.image + '" style="width:100%;max-height:260px;object-fit:cover;border-radius:12px;" /></div>'
-    : "";
-  var timeStr = post.time;
-  if (post.timestamp) {
-    var elapsed = Math.floor((Date.now() - post.timestamp) / 1000 / 60);
-    if (elapsed < 1) timeStr = "刚刚";
-    else if (elapsed < 60) timeStr = elapsed + "分钟前";
-    else if (elapsed < 1440) timeStr = Math.floor(elapsed / 60) + "小时前";
-    else timeStr = Math.floor(elapsed / 1440) + "天前";
-  }
-  return '<div class="feed-item user-post" data-post-id="' + post.id + '">' +
-    '<div class="feed-header">' +
-      feedAvatarHtml("linear-gradient(135deg,#FF6BA6,#C44569)", "我") +
-      '<div><div class="feed-user">我</div><div class="feed-time">' + timeStr + '</div></div>' +
-    '</div>' +
-    (post.text ? '<div class="feed-body">' + post.text + '</div>' : '') +
-    imgHtml +
-    '<div class="feed-actions">' +
-      '<span class="feed-like-btn">♡ ' + (post.likes || 0) + '</span>' +
-      '<span>💬 ' + (post.comments ? post.comments.length : 0) + '</span>' +
-    '</div>' +
-  '</div>';
-}
-
-// 公开平台（Twitter/IG/Bubble）vs 私密平台（KakaoTalk/微信）
-function isPublicPlatform() {
-  return currentApp === "twitter" || currentApp === "instagram" || currentApp === "bubble";
-}
-
-// 每条动态分配 15-25 条评论
-function getCommentCount() { return 100 + Math.floor(Math.random() * 101); }
-
-// 多语言粉丝评论池（精简版，实际生成时随机组合）
-var fanNamesByLang = {
-  en: ["@kpop_lover","@music_fan22","@hanon_stan","@idol_world","@stage_addict","@melody_heart","@global_fan","@bts_army","@blink_4ever","@korea_fan"],
-  ko: ["@별빛소녀","@음악사랑","@아이돌팬","@서울하늘","@부산갈매기","@제주바다","@꽃길걷자","@달빛소년","@봄날의약속","@겨울연가"],
-  jp: ["@東京LOVE","@大阪ファン","@札幌の星","@福岡もも","@名古屋ドリーム","@横浜ベイ","@京都はんなり","@神戸ビーナス","@沖縄サンセット","@仙台ずんだ"],
-  zh: ["@追星少女","@娱乐圈观察","@今天也在磕","@打工人摸鱼","@吃瓜群众","@音乐发烧友","@舞台控","@路人甲","@铁粉不解释","@实力至上了"],
-  es: ["@fan_latina","@kpop_mexico","@chile_idol","@peru_music","@brazil_kpop","@colombia_dance"],
-  th: ["@ไทยเลิฟ","@กรุงเทพแฟน","@เชียงใหม่ติ่ง","@ภูเก็ตคลั่ง","@พัทยารัก"],
+var badgeEls = {
+  kakaotalk: document.getElementById("badgeKakao"),
+  instagram: document.getElementById("badgeInsta"),
+  wechat:    document.getElementById("badgeWechat"),
+  twitter:   document.getElementById("badgeTwitter"),
+  bubble:    document.getElementById("badgeBubble"),
 };
 
-var positiveComments = {
-  en: ["You're literally glowing! ✨","Best artist of this generation fr","I can't stop watching this","This made my whole day 💜","Iconic behavior honestly","No one is doing it like you","Stanning you was the best decision","Pure talent, no debate","My queen/king 👑","Literally crying tears of joy rn 😭","This is why you're my bias","Talented, brilliant, incredible, amazing","Period. 💅","Saving this forever","You never disappoint"],
-  ko: ["진짜 미쳤다... 너무 예뻐요 ㅠㅠ","역시 최고예요! 💕","오늘도 반합니다...","이게 진정한 실력이지","팬이길 잘했다고 느끼는 순간","언니 완전 천재 아니에요?","심장이 아파요 너무 좋아서","매일매일 레전드 갱신 중","이번에도 역시 대박","존재 자체가 선물이야","인정할 수밖에 없는 실력","감동이에요 진짜 ㅠㅠ","무대 장악력 최고","이걸 어떻게 참아요","역대급 비주얼"],
-  jp: ["本当に美しいです ✨","最高のアーティスト！","毎日癒されています 💕","天才すぎます...","ずっと応援します！","感動で涙が止まらない","完璧なパフォーマンス","日本から愛を込めて 🇯🇵","あなたの声が世界を変える","今日もお疲れ様でした！","こんなに素敵な人はいない","一目惚れしました","努力が報われて良かった","来月の公演楽しみです！","永遠にファンでいる"],
-  zh: ["绝了，这就是实力 ✨","今天也被圈粉了","为什么这么好看我不理解","一天不看浑身难受","路人转粉只需要一张照片","我不允许有人没看过这个","这谁顶得住啊","天选之女/子","我宣布这是本月最佳","好看这两个字我已经说倦了","这种程度是真实存在的吗","每天都被惊艳到","不愧是你 👍","无法用语言形容的好","出道以来一直在进步"],
-  es: ["Eres increíble! 💕","La mejor del mundo","Te amo con todo mi corazón","Nadie como tú, reina","Brasil te ama 🇧🇷","Colombia está contigo","México te apoya siempre","Qué talento, por Dios","Eres un ángel en la tierra","Simplemente perfecta"],
-  th: ["ดีที่สุดในโลกเลย 💕","รักมากๆ ค่ะ","สวยมากกกก","เก่งที่สุดในสามโลก","คิดถึงจังเลย","วันนี้ก็สวยเหมือนเดิม","เป็นกำลังใจให้นะคะ","รอยยิ้มมีค่ามาก","ขอให้มีความสุขมากๆ","รักตั้งแต่วันแรก"],
-};
+function getTotalBadge(appId) {
+  var data = getAppData(appId);
+  if (!data || !data.chatList) return 0;
+  var total = 0;
+  data.chatList.forEach(function(c) { total += c.badge || 0; });
+  return total;
+}
 
-var neutralComments = {
-  en: ["Not bad","Is this new?","When is the next album coming?","I prefer the old style tbh","Interesting...","What song is this?","Can someone translate?","Has anyone seen the new teaser?","I'm new here, what's going on?","Just passing by","Who is this?","Reminds me of someone else","Not my cup of tea but ok","The production could be better","Needs more promo imo"],
-  ko: ["오...","이번 컨셉은 뭐지?","솔직히 저번 게 더 좋았어요","신곡 언제 나와요?","음... 그냥 그래요","무대는 좋은데 노래가 아쉽","표정이 좀 어색한 것 같아요","다음엔 더 잘하길","기대보다는 별로","이 노래 제목이 뭐예요?","아이돌 이름이 뭐죠?","그냥 지나가다가","댓글 남기고 갑니다","무난무난하네요","호불호 갈릴 듯"],
-  jp: ["うーん...普通かな","前の方が好きだった","新曲まだですか？","誰か翻訳して","この曲なんですか？","悪くはないけど...","期待してたのと違う","もっと練習してほしい","ちょっと微妙","通りすがりです","あんまり好みじゃない","衣装がイマイチ","もっと頑張ってほしい","なんか違うんだよなあ","次のアルバムに期待"],
-  zh: ["还行吧","感觉不如上次","有没有人觉得一般","新歌什么时候出","纯路人，这是谁","说实话有点失望","造型不太行","风格变了不太适应","能听，但不够惊艳","pass","就那样吧","粉丝别喷我，一般般","需要更多好歌","上一个舞台更好","没有记忆点"],
-};
-
-var negativeComments = {
-  en: ["Overrated af 🙄","This is so boring","Try harder next time","Not impressed at all","Stop trying so hard","Generic and forgettable","I've seen better from nugu groups","Lip sync is obvious","Auto-tune can't save this","Disappointing comeback tbh","Why is this trending?","Y'all praise anything these days","Mid at best","Copying someone else's style","Peaked already"],
-  ko: ["별로다...","이게 왜 난리야","솔직히 못하네요","실력이 늘긴 하나요?","표정이 너무 과해요","과대평가됐네","립싱크 티나요","예전이 더 나았어요","이런 걸 왜 응원함","실망이에요 진짜","무대 매너가 별로","춤선이 안 예뻐요","가창력 좀 키우세요","팬들 눈이 삐었나","퇴보했네요"],
-  jp: ["期待外れ...","下手になったね","リップシンクばればれ","つまらない","こんなの誰が聞くの","お金の無駄","ファンがかわいそう","全然ダメ","昔の方がマシ","やる気あるの？","もう引退したら","レベル低すぎ","恥ずかしくないの","どこがいいのかわからない","時間返して"],
-  zh: ["这也太一般了","过誉了吧","粉丝滤镜太厚","说实话挺难听的","这也能吹上天","不知道在火什么","泯然众人矣","巅峰期过了吧","嘴型都对不上","越来越不行了","就这？","真的get不到","录音室歌手罢了","离开修音不能听","跳舞像广播体操"],
-};
-
-var replyToFanComments = {
-  en: ["@kpop_lover totally agree!","@music_fan22 same here 💕","@hanon_stan fr fr","@idol_world you said it","Right? @stage_addict gets it","@melody_heart exactly my thoughts","This 100% @global_fan","Couldn't agree more @korea_fan"],
-  ko: ["@별빛소녀 인정이요","@음악사랑 저도요!","@서울하늘 공감합니다","맞아요 @부산갈매기 님","@제주바다 진짜 그렇죠","@봄날의약속 인정 인정"],
-  jp: ["@東京LOVE 同感です！","@大阪ファン そうですよね","@札幌の星 わかります"],
-  zh: ["@追星少女 说得对","@娱乐圈观察 +1","@吃瓜群众 附议"],
-};
-
-function randomFrom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
-function generateComments(count) {
-  var comments = [];
-  var langs = isPublicPlatform() ? ["en","ko","jp","zh","es","th"] : ["zh"];
-  // 语言权重：根据平台调整
-  var weights;
-  if (currentApp === "twitter") weights = { en: 35, ko: 20, jp: 10, zh: 10, es: 10, th: 5 };
-  else if (currentApp === "instagram") weights = { en: 30, ko: 15, jp: 10, zh: 8, es: 15, th: 7 };
-  else if (currentApp === "bubble") weights = { ko: 50, en: 15, jp: 15, zh: 15, es: 3, th: 2 };
-  else weights = { zh: 100 };
-
-  var totalW = 0; for (var l in weights) totalW += weights[l];
-
-  for (var i = 0; i < count; i++) {
-    // 随机选择语言
-    var r = Math.random() * totalW;
-    var lang = "en";
-    for (var l in weights) { r -= weights[l]; if (r <= 0) { lang = l; break; } }
-
-    // 50% 正面, 20% 中性, 15% 负面, 15% 粉丝互动回复
-    var toneRand = Math.random();
-    var tone, pool;
-    if (toneRand < 0.5) { tone = "positive"; pool = positiveComments; }
-    else if (toneRand < 0.8) { tone = "neutral"; pool = neutralComments; }
-    else if (toneRand < 0.85) { tone = "negative"; pool = negativeComments; }
-    else { tone = "reply"; pool = replyToFanComments; }
-
-    var texts = pool[lang] || pool["en"];
-    var names = fanNamesByLang[lang] || fanNamesByLang["en"];
-    var text = randomFrom(texts);
-    if (tone === "reply") text = randomFrom(replyToFanComments[lang] || replyToFanComments["en"]);
-
-    var comment = {
-      id: "c" + i,
-      user: randomFrom(names),
-      text: text,
-      tone: tone,
-      likes: tone === "positive" ? Math.floor(Math.random() * 45) + 3 :
-             tone === "negative" ? Math.floor(Math.random() * 8) :
-             Math.floor(Math.random() * 15),
-      lang: lang,
-    };
-
-    // 部分评论有嵌套回复
-    if (Math.random() < 0.15 && comments.length > 0) {
-      var parent = comments[Math.floor(Math.random() * comments.length)];
-      if (!parent.replies) parent.replies = [];
-      parent.replies.push({
-        id: comment.id + "r",
-        user: randomFrom(names),
-        text: tone === "reply" ? randomFrom(replyToFanComments[lang] || replyToFanComments["en"]) : randomFrom(neutralComments[lang] || neutralComments["en"]),
-        likes: Math.floor(Math.random() * 8),
-      });
+function updateAllBadges() {
+  Object.keys(badgeEls).forEach(function(appId) {
+    var el = badgeEls[appId];
+    if (!el) return;
+    var count = getTotalBadge(appId);
+    if (count > 0) {
+      el.textContent = count > 99 ? "99+" : count;
+      el.classList.add("show");
     } else {
-      comments.push(comment);
-    }
-  }
-  return comments;
-}
-
-function renderComments(comments) {
-  if (!comments || comments.length === 0) return "";
-  var display = comments.slice(0, 30); // 最多显示30条
-  var html = '<div class="feed-comments">';
-  display.forEach(function(c) {
-    html += '<div class="comment-item ' + (c.tone === "negative" ? "comment-negative" : "") + '">' +
-      '<span class="comment-user">' + c.user + '</span>' +
-      '<span class="comment-text">' + c.text + '</span>' +
-      '<span class="comment-likes">♡ ' + c.likes + '</span>' +
-    '</div>';
-    if (c.replies) {
-      c.replies.forEach(function(r) {
-        html += '<div class="comment-item comment-reply">' +
-          '<span class="comment-user">' + r.user + '</span>' +
-          '<span class="comment-text">' + r.text + '</span>' +
-          '<span class="comment-likes">♡ ' + r.likes + '</span>' +
-        '</div>';
-      });
+      el.classList.remove("show");
     }
   });
-  if (comments.length > 30) {
-    html += '<div class="comment-more">查看全部 ' + comments.length + ' 条评论...</div>';
-  }
-  html += '</div>';
-  return html;
 }
 
-// 评论缓存（同一次浏览保持一致）
-var commentCache = {};
-
-function refreshFeed() {
-  var data = getAppData(currentApp);
-  var mockItems = data.feedItems;
-  var userPosts = loadUserPosts();
-  var isPublic = isPublicPlatform();
-  var allItems = [];
-
-  // 用户帖子
-  userPosts.forEach(function(p) {
-    // 为用户帖子生成评论（仅公开平台）
-    if (isPublic && !commentCache[p.id]) {
-      commentCache[p.id] = generateComments(getCommentCount());
-    }
-    var comments = isPublic ? (commentCache[p.id] || []) : [];
-    allItems.push({
-      type: "user",
-      html: renderUserPost(p, comments),
-      id: p.id,
-      post: p
-    });
-  });
-
-  // Mock 数据
-  mockItems.forEach(function(item, i) {
-    var mockId = "mock_" + i;
-    if (isPublic && !commentCache[mockId]) {
-      commentCache[mockId] = generateComments(getCommentCount());
-    }
-    var comments = isPublic ? (commentCache[mockId] || []) : [];
-    allItems.push({
-      type: "mock",
-      html: renderFeedItemHtml(item, comments),
-      id: mockId
-    });
-  });
-
-  feedItems.innerHTML = allItems.map(function(a) { return a.html; }).join("");
-
-  // 点赞事件
-  feedItems.querySelectorAll(".feed-like-btn").forEach(function(btn) {
-    btn.addEventListener("click", function(e) {
-      e.stopPropagation();
-      var postEl = btn.closest(".user-post");
-      if (!postEl) return;
-      var postId = postEl.dataset.postId;
-      var posts = loadUserPosts();
-      var post = posts.find(function(p) { return p.id === postId; });
-      if (!post) return;
-      post.liked = !post.liked;
-      post.likes += post.liked ? 1 : -1;
-      if (post.likes < 0) post.likes = 0;
-      saveUserPosts(posts);
-      btn.textContent = (post.liked ? "♥ " : "♡ ") + post.likes;
-    });
-  });
-
-  // 评论展开/收起
-  feedItems.querySelectorAll(".comment-toggle").forEach(function(btn) {
-    btn.addEventListener("click", function() {
-      var commentsEl = btn.nextElementSibling;
-      var isShowing = !commentsEl.classList.contains("hidden");
-      if (isShowing) {
-        commentsEl.classList.add("hidden");
-        btn.textContent = "💬 查看评论";
-      } else {
-        commentsEl.classList.remove("hidden");
-        btn.textContent = "💬 收起评论";
-      }
-    });
-  });
-}
-
-function renderUserPost(post, comments) {
-  var isPublic = isPublicPlatform();
-  var imgHtml = post.image
-    ? '<div class="feed-image" style="height:auto;background:transparent;"><img src="' + post.image + '" style="width:100%;max-height:260px;object-fit:cover;border-radius:12px;" /></div>'
-    : "";
-
-  var elapsed = post.timestamp ? Math.floor((Date.now() - post.timestamp) / 1000 / 60) : 0;
-  var timeStr = post.time || (elapsed < 1 ? "刚刚" : elapsed < 60 ? elapsed + "分钟前" : elapsed < 1440 ? Math.floor(elapsed / 60) + "小时前" : Math.floor(elapsed / 1440) + "天前");
-
-  var actionsHtml = isPublic
-    ? '<span class="feed-like-btn">' + (post.liked ? "♥ " : "♡ ") + (post.likes || 0) + '</span><span class="comment-toggle" style="cursor:pointer;">💬 查看评论</span>'
-    : '';
-
-  return '<div class="feed-item user-post" data-post-id="' + post.id + '">' +
-    '<div class="feed-header">' +
-      feedAvatarHtml("linear-gradient(135deg,#FF6BA6,#C44569)", "我") +
-      '<div><div class="feed-user">我</div><div class="feed-time">' + timeStr + '</div></div>' +
-    '</div>' +
-    (post.text ? '<div class="feed-body">' + post.text + '</div>' : '') +
-    imgHtml +
-    (actionsHtml ? '<div class="feed-actions">' + actionsHtml + '</div>' : '') +
-    (isPublic ? '<div class="feed-comments hidden">' + renderComments(comments) + '</div>' : '') +
-  '</div>';
-}
-
-function renderFriendInteractions(item) {
-  var html = '';
-  var names = item.friendLikes || [];
-  var comments = item.friendComments || [];
-  if (names.length > 0) {
-    var likeStr = names.slice(0, 5).join(', ');
-    if (names.length > 5) likeStr += ' 等' + names.length + '人';
-    html += '<div class="friend-likes">❤️ ' + likeStr + '</div>';
-  }
-  if (comments.length > 0) {
-    html += '<div class="friend-comments">';
-    comments.forEach(function(c) {
-      html += '<div class="fc-item"><b>' + c.user + '</b>：' + c.text + '</div>';
-    });
-    html += '</div>';
-  }
-  return html;
-}
-
-function renderFeedItemHtml(item, comments) {
-  var isPublic = isPublicPlatform();
-  var actionsHtml;
-  if (isPublic) {
-    actionsHtml = '<div class="feed-actions"><span>♡ ' + (item.likes || 0) + '</span>' + (item.rt ? '<span>↺ ' + item.rt + '</span>' : '') + '<span class="comment-toggle" style="cursor:pointer;">💬 查看评论</span></div>';
-  } else {
-    actionsHtml = renderFriendInteractions(item);
-    if (!actionsHtml && item.likes) actionsHtml = '<div class="feed-actions"><span>♡ ' + item.likes + '</span></div>';
-  }
-  return '<div class="feed-item">' +
-    '<div class="feed-header">' +
-      feedAvatarHtml(item.color, item.letter, item.role) +
-      '<div><div class="feed-user">' + item.user + '</div><div class="feed-time">' + item.time + '</div></div>' +
-    '</div>' +
-    (item.img ? '<div class="feed-image">' + item.img + '</div>' : '') +
-    '<div class="feed-body">' +
-      '<span class="feed-text-orig">' + item.body + '</span>' +
-      (item.tr && item.tr !== item.body
-        ? '<button class="msg-translate-btn" onclick="var t=this.nextElementSibling;t.classList.toggle('show');this.textContent=t.classList.contains('show')?'收起':'译'">译</button><div class="msg-translation">' + item.tr + '</div>'
-        : '') +
-    '</div>' +
-    actionsHtml +
-    (isPublic ? '<div class="feed-comments hidden">' + renderComments(comments) + '</div>' : '') +
-  '</div>';
+function pulseBadge(appId) {
+  var el = badgeEls[appId];
+  if (!el) return;
+  el.classList.remove("pulse");
+  void el.offsetWidth;
+  el.classList.add("pulse");
 }
 
 // =============================================
-// 设定页提交按钮
+// 消息实时到达模拟
 // =============================================
-// 设定页提交按钮
-setupBtn.addEventListener("click", submitProfile);
+var arrivalTimer = null;
 
-// 回车提交
-[setStageName, setRealName, setAge, setHeight, setDebutYear, setGroup].forEach((el) => {
-  el.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") submitProfile();
+function startMessageArrival() {
+  stopMessageArrival();
+  arrivalTimer = setInterval(function() {
+    if (currentApp && currentScreen === "chatlist") {
+      simulateNewMessage(currentApp);
+    }
+  }, 15000 + Math.random() * 30000); // 每15-45秒
+}
+
+function stopMessageArrival() {
+  if (arrivalTimer) { clearInterval(arrivalTimer); arrivalTimer = null; }
+}
+
+function simulateNewMessage(appId) {
+  var data = getAppData(appId);
+  if (!data) return;
+  var list = data.chatList;
+  var idx = Math.floor(Math.random() * list.length);
+  var chat = list[idx];
+
+  // 随机新消息内容
+  var newMsgs = {
+    kakaotalk: ["보고 싶어 ㅠㅠ","야~ 뭐해?","오늘 진짜 대박이야","나 방금 신곡 들었어!","주말 약속 잊지 마~"],
+    instagram: ["Just saw your new post!! 🔥","OMG you're glowing ✨","When's the next live?","Love from Brazil! 🇧🇷","You inspire me so much"],
+    wechat: ["在吗？","今天辛苦了","明天见~","好的收到","刚才那个方案看了吗"],
+    twitter: ["you're trending again! 📈","new fancam just dropped","DM me back when you can","that stage was iconic","thoughts on the new teaser?"],
+    bubble: ["오늘 하루도 수고했어요 💕","언니 보고 싶어요...","맛있는 저녁 드세요!","내일도 화이팅","새 앨범 너무 기대돼요"],
+  };
+
+  var pool = newMsgs[appId] || newMsgs.kakaotalk;
+  var newText = pool[Math.floor(Math.random() * pool.length)];
+
+  // 更新聊天列表数据
+  chat.preview = newText;
+  var now = new Date();
+  var h = now.getHours(), m = now.getMinutes();
+  chat.time = (h < 10 ? "" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+  chat.badge = (chat.badge || 0) + 1;
+
+  // 刷新列表显示
+  if (currentApp === appId && currentScreen === "chatlist") {
+    renderChatList(data.chatList);
+  }
+
+  // 更新角标
+  updateAllBadges();
+  if (currentApp !== appId || currentScreen !== "chatlist") {
+    pulseBadge(appId);
+  }
+}
+
+// =============================================
+// 动态时间实时化
+// =============================================
+function dynamicTime(offsetMinutes) {
+  var now = new Date();
+  var t = new Date(now.getTime() - offsetMinutes * 60 * 1000);
+  var diffMin = Math.floor((now - t) / 1000 / 60);
+  if (diffMin < 1) return "刚刚";
+  if (diffMin < 60) return diffMin + "分钟前";
+  if (diffMin < 120) return "1小时前";
+  if (diffMin < 1440) return Math.floor(diffMin / 60) + "小时前";
+  if (diffMin < 2880) return "昨天";
+  return Math.floor(diffMin / 1440) + "天前";
+}
+
+function dynamicTimeKR(offsetMinutes) {
+  var now = new Date();
+  var t = new Date(now.getTime() - offsetMinutes * 60 * 1000);
+  var diffMin = Math.floor((now - t) / 1000 / 60);
+  if (diffMin < 1) return "방금";
+  if (diffMin < 60) return diffMin + "분 전";
+  if (diffMin < 120) return "1시간 전";
+  if (diffMin < 1440) return Math.floor(diffMin / 60) + "시간 전";
+  if (diffMin < 2880) return "어제";
+  return Math.floor(diffMin / 1440) + "일 전";
+}
+
+// 为 Mock 动态生成实时时间偏移（首次加载时随机分配，后续保持不变）
+var feedTimeOffsets = {};
+
+function getFeedTimeOffset(feedKey, lang) {
+  if (!feedTimeOffsets[feedKey]) {
+    // 随机分配：几分钟到几天前
+    var pool = [
+      Math.random() * 30,          // 0-30分钟前
+      30 + Math.random() * 90,     // 30-120分钟前
+      120 + Math.random() * 240,   // 2-6小时前
+      360 + Math.random() * 360,   // 6-12小时前
+      720 + Math.random() * 720,   // 12-24小时前
+      1440 + Math.random() * 1440, // 1-2天前
+      2880 + Math.random() * 2160, // 2-5天前
+    ];
+    feedTimeOffsets[feedKey] = pool[Math.floor(Math.random() * pool.length)];
+  }
+  var offset = feedTimeOffsets[feedKey];
+  if (lang === "ko") return dynamicTimeKR(offset);
+  return dynamicTime(offset);
+}
+
+// 覆盖 feed 数据中的时间为动态时间（在渲染前调用）
+function applyDynamicTimes(items) {
+  items.forEach(function(item, i) {
+    var lang = (currentApp === "kakaotalk" || currentApp === "bubble") ? "ko" : "zh";
+    item.time = getFeedTimeOffset(currentApp + "_feed_" + i, lang);
   });
-});
-
-// 首页设置按钮 → 返回修改设定
-homeSettingsBtn.addEventListener("click", () => {
-  showSetupScreen(true);
-});
-
-// =============================================
-// PWA 安装引导（简化版，全浏览器兼容）
-// =============================================
-let deferredPrompt = null;
-let globalBarDismissed = false;
-let installHandled = false;
-
-function detectPlatform() {
-  var ua = navigator.userAgent || "";
-  if (/iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) {
-    return { os: "ios", browser: /CriOS/.test(ua) ? "chrome" : /FxiOS/.test(ua) ? "firefox" : /EdgiOS/.test(ua) ? "edge" : "safari" };
-  }
-  if (/Android/.test(ua)) {
-    return { os: "android", browser: /SamsungBrowser/.test(ua) ? "samsung" : /Firefox/.test(ua) && !/Chrome/.test(ua) ? "firefox" : /Chrome/.test(ua) ? "chrome" : "other" };
-  }
-  return { os: "desktop", browser: /Edg\//.test(ua) ? "edge" : /Chrome/.test(ua) ? "chrome" : /Safari/.test(ua) ? "safari" : "other" };
 }
 
-function showTip(title, html) {
-  var old = document.querySelector(".install-tip-overlay");
-  if (old) old.remove();
-  var div = document.createElement("div");
-  div.className = "install-tip-overlay";
-  div.style.cssText = "position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.88);display:flex;align-items:flex-end;justify-content:center;padding:16px;";
-  div.innerHTML = '<div style="background:#1e1e32;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:28px 24px 20px;width:100%;max-width:340px;text-align:center;color:#fff;animation:tipUp .3s ease;">' +
-    '<div style="font-size:40px;margin-bottom:10px;">📱</div>' +
-    '<div style="font-size:17px;font-weight:700;margin-bottom:10px;">' + title + '</div>' +
-    '<div style="color:rgba(255,255,255,.5);font-size:13px;line-height:2;text-align:left;">' + html + '</div>' +
-    '<button id="tipCloseBtn" style="margin-top:18px;padding:12px 0;width:100%;border-radius:14px;border:none;background:linear-gradient(135deg,#FF6BA6,#C44569);color:#fff;font-size:15px;font-weight:600;">知道了</button>' +
-    '</div>';
-  document.body.appendChild(div);
-  div.addEventListener("click", function(e) { if (e.target === div) div.remove(); });
-  var closeBtn = document.getElementById("tipCloseBtn");
-  if (closeBtn) closeBtn.addEventListener("click", function() { div.remove(); });
-}
-
-// 为元素安全添加点击事件
-function safeClick(el, fn) {
-  if (el) el.addEventListener("click", fn);
-}
-
-function setupInstallUI() {
-  if (installHandled) return;
-  installHandled = true;
-
-  var p = detectPlatform();
-  var os = p.os;
-
-  // 全局悬浮安装条
-  if (globalInstallBar && gibText && gibBtn) {
-    if (os === "ios") {
-      gibText.textContent = "添加到主屏幕，像 App 一样使用";
-      gibBtn.textContent = "教程";
-    } else {
-      gibText.textContent = "安装到桌面，像原生 App 一样打开";
-      gibBtn.textContent = "安装";
-    }
-    globalInstallBar.classList.remove("dismissed");
-  }
-}
-
-function handleInstallClick() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(function(result) {
-      if (result.outcome === "accepted") {
-        if (globalInstallBar) globalInstallBar.classList.add("dismissed");
-        globalBarDismissed = true;
-      }
-      deferredPrompt = null;
-    });
-    return;
-  }
-  var p = detectPlatform();
-  if (p.os === "ios") {
-    showTip("添加到主屏幕",
-      "<b>1.</b> 点击浏览器底部中间的 <b>分享按钮</b> ⎋<br>" +
-      "<b>2.</b> 向下滑动找到 <b>「添加到主屏幕」</b><br>" +
-      "<b>3.</b> 确认名称后点击右上角 <b>「添加」</b><br>" +
-      "<b>4.</b> 回到桌面即可看到 <b>idol</b> 图标 ✨");
-  } else if (p.os === "android") {
-    showTip("添加到主屏幕",
-      "<b>1.</b> 点击浏览器右上角 <b>菜单按钮 ⋮</b><br>" +
-      "<b>2.</b> 找到 <b>「添加到主屏幕」</b> 或 <b>「安装应用」</b><br>" +
-      "<b>3.</b> 确认后桌面出现 <b>idol</b> 图标 ✨<br>" +
-      "<span style='font-size:11px;opacity:.35;'>提示：使用 Chrome 浏览器打开可一键安装</span>");
-  } else {
-    showTip("安装到桌面",
-      "<b>1.</b> 使用 <b>Chrome</b> 或 <b>Edge</b> 浏览器打开此页面<br>" +
-      "<b>2.</b> 地址栏右侧点击 <b>⊕ 安装图标</b><br>" +
-      "<b>3.</b> 桌面出现 <b>idol</b> 独立应用窗口 ✨");
-  }
-}
-
-safeClick(gibBtn, handleInstallClick);
-
-window.addEventListener("beforeinstallprompt", function(e) {
-  e.preventDefault();
-  deferredPrompt = e;
-  if (gibText && gibBtn) {
-    gibText.textContent = "一键安装到桌面";
-    gibBtn.textContent = "立即安装";
-    if (globalInstallBar) globalInstallBar.classList.remove("dismissed");
-  }
-});
-
-// =============================================
-// 实时时间 + 电量同步
-// =============================================
-function syncStatusBar() {
-  var timeEl = document.getElementById("liveTime");
-  var batEl  = document.getElementById("liveBattery");
-  if (!timeEl && !batEl) return;
-
-  function updateTime() {
-    if (!timeEl) return;
-    var now = new Date();
-    var h = now.getHours();
-    var m = now.getMinutes();
-    timeEl.textContent = h + ":" + (m < 10 ? "0" + m : m);
-  }
-
-  function updateBattery(level, charging) {
-    if (!batEl) return;
-    var pct = Math.round(level * 100);
-    var blocks = Math.round(pct / 10);
-    var bar = "";
-    for (var i = 0; i < 10; i++) {
-      bar += i < blocks ? "▮" : "▯";
-    }
-    batEl.textContent = bar + " " + pct + "%";
-    if (charging) batEl.textContent += " ⚡";
-  }
-
-  updateTime();
-  setInterval(updateTime, 30000); // 每30秒更新
-
-  if (navigator.getBattery) {
-    navigator.getBattery().then(function(bat) {
-      updateBattery(bat.level, bat.charging);
-      bat.addEventListener("levelchange", function() { updateBattery(bat.level, bat.charging); });
-      bat.addEventListener("chargingchange", function() { updateBattery(bat.level, bat.charging); });
-    });
-  } else if (batEl) {
-    // 不支持 Battery API 时保留默认显示
-    batEl.textContent = "▮▮▮▮ ▮▮▮▮ --";
-  }
-}
 
 // =============================================
 // 启动流程
@@ -1563,6 +1111,9 @@ function syncStatusBar() {
 
   // 安装引导
   setupInstallUI();
+
+  // 桌面角标
+  updateAllBadges();
 
   // 实时时间电量
   syncStatusBar();
