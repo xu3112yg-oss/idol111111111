@@ -290,7 +290,24 @@
   <div class="global-install-bar" id="globalInstallBar">
     <span class="gib-icon">📱</span>
     <span class="gib-text" id="gibText">添加到主屏幕，像 App 一样使用</span>
-    <button class="gib-btn" id="gibBtn" onclick="alert('点击成功！若看到此弹窗说明按钮正常，问题在弹窗渲染。')">测试</button>
+    <button class="gib-btn" id="gibBtn" onclick="(function(){
+  var ua=navigator.userAgent||'';
+  var isIOS=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  var steps=isIOS?'点浏览器底部 <b>分享按钮</b>，找到 <b>「添加到主屏幕」</b>，点击 <b>添加</b> 完成。':'点浏览器 <b>菜单（⋮）</b>，找到 <b>「添加到主屏幕」</b>，确认后桌面出现图标。';
+  var ov=document.createElement('div');ov.className='install-tip-overlay';
+  ov.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;z-index:99999;background:rgba(0,0,0,.9);display:flex;align-items:flex-end;justify-content:center;padding:16px;';
+  var card=document.createElement('div');
+  card.style.cssText='background:#1e1e32;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:28px 24px 20px;width:100%;max-width:340px;text-align:center;color:#fff;';
+  var emoji=document.createElement('div');emoji.style.cssText='font-size:40px;margin-bottom:10px;';emoji.textContent='📱';
+  var title=document.createElement('div');title.style.cssText='font-size:17px;font-weight:700;margin-bottom:10px;';title.textContent='添加到主屏幕';
+  var body=document.createElement('div');body.style.cssText='color:rgba(255,255,255,.5);font-size:13px;line-height:2;text-align:left;';body.innerHTML=steps;
+  var btn=document.createElement('button');btn.textContent='知道了';
+  btn.style.cssText='margin-top:18px;padding:12px 0;width:100%;border-radius:14px;border:none;background:linear-gradient(135deg,#FF6BA6,#C44569);color:#fff;font-size:15px;font-weight:600;';
+  btn.addEventListener('click',function(){ov.remove();});
+  card.appendChild(emoji);card.appendChild(title);card.appendChild(body);card.appendChild(btn);
+  ov.appendChild(card);document.body.appendChild(ov);
+  ov.addEventListener('click',function(e){if(e.target===ov)ov.remove();});
+})()">安装</button>
   </div>
 
   <!-- 发布动态弹窗 -->
