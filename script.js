@@ -1292,6 +1292,7 @@ function detectPlatform() {
 }
 
 function showTip(title, html) {
+  if (typeof window !== "undefined") window.showTip = showTip;
   var old = document.querySelector(".install-tip-overlay");
   if (old) old.remove();
   var div = document.createElement("div");
@@ -1314,6 +1315,7 @@ function safeClick(el, fn) {
 }
 
 function setupInstallUI() {
+  if (typeof window !== "undefined") window.setupInstallUI = setupInstallUI;
   if (installHandled) return;
   installHandled = true;
   var p = detectPlatform();
@@ -1326,6 +1328,7 @@ function setupInstallUI() {
 }
 
 function handleInstallClick() {
+  if (typeof window !== "undefined") window.handleInstallClick = handleInstallClick;
   if (deferredPrompt) {
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then(function(result) {
@@ -1577,3 +1580,45 @@ function applyDynamicTimes(items) {
     showSetupScreen(false);
   }
 })();
+
+// =============================================
+// 安装按钮兜底（确保所有浏览器点击有反应）
+// =============================================
+document.addEventListener("DOMContentLoaded", function() {
+  var btn = document.getElementById("gibBtn");
+  if (!btn) return;
+  // 移除旧事件避免重复
+  var newBtn = btn.cloneNode(true);
+  btn.parentNode.replaceChild(newBtn, btn);
+  newBtn.addEventListener("click", function() {
+    var p = (typeof detectPlatform === "function") ? detectPlatform() : { os: "ios" };
+    if (typeof deferredPrompt !== "undefined" && deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function(r) {
+        if (r.outcome === "accepted") {
+          var bar = document.getElementById("globalInstallBar");
+          if (bar) bar.classList.add("dismissed");
+        }
+      });
+      return;
+    }
+    // 显示教程
+    var old = document.querySelector(".install-tip-overlay");
+    if (old) old.remove();
+    var div = document.createElement("div");
+    div.className = "install-tip-overlay";
+    div.style.cssText = "position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);display:flex;align-items:flex-end;justify-content:center;padding:16px;";
+    var steps = p.os === "ios"
+      ? "<b>1.</b> 点击浏览器底部 <b>分享按钮</b> ⎋<br><b>2.</b> 找到 <b>「添加到主屏幕」</b><br><b>3.</b> 点击 <b>「添加」</b> 完成 ✨"
+      : "<b>1.</b> 点击浏览器 <b>菜单（⋮）</b><br><b>2.</b> 找到 <b>「添加到主屏幕」</b><br><b>3.</b> 确认后桌面出现图标 ✨";
+    div.innerHTML = '<div style="background:#1e1e32;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:28px 24px 20px;width:100%;max-width:340px;text-align:center;color:#fff;">' +
+      '<div style="font-size:40px;margin-bottom:10px;">📱</div>' +
+      '<div style="font-size:17px;font-weight:700;margin-bottom:10px;">添加到主屏幕</div>' +
+      '<div style="color:rgba(255,255,255,.5);font-size:13px;line-height:2;text-align:left;">' + steps + '</div>' +
+      '<button style="margin-top:18px;padding:12px 0;width:100%;border-radius:14px;border:none;background:linear-gradient(135deg,#FF6BA6,#C44569);color:#fff;font-size:15px;font-weight:600;" onclick="this.closest('.install-tip-overlay').remove()">知道了</button>' +
+      '</div>';
+    document.body.appendChild(div);
+    div.addEventListener("click", function(e) { if (e.target === div) div.remove(); });
+  });
+});
+
